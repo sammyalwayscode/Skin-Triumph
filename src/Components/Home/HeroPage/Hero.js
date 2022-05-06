@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const Hero = () => {
   return (
-    <div>
+    <Container>
       <Carousel fade>
         <Carousel.Item>
           <Image
@@ -45,14 +45,18 @@ const Hero = () => {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
-    </div>
+    </Container>
   );
 };
 
 export default Hero;
 
 const Image = styled.img`
-  height: 500px;
+  height: 90vh;
   width: 100%;
   object-fit: cover;
+`;
+
+const Container = styled.div`
+  margin-bottom: 100px;
 `;

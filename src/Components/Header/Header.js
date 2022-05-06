@@ -12,6 +12,7 @@ import { MdContacts } from "react-icons/md";
 import { VscThreeBars } from "react-icons/vsc";
 import { GiCancel } from "react-icons/gi";
 import SideBar from "./SideBar";
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
   const [toggle, setToggle] = useState(false);
@@ -28,27 +29,27 @@ const Header = () => {
           </Logo>
 
           <Navigations>
-            <Navs>
+            <Navs to="/">
               <RiHomeSmileFill />
               <span>Home</span>
             </Navs>
-            <Navs>
+            <Navs to="/about">
               <FaLayerGroup />
               <span>About</span>
             </Navs>
-            <Navs>
+            <Navs to="/products">
               <AiTwotoneSkin />
               <span>Products</span>
             </Navs>
-            <Navs>
+            <Navs to="/blog">
               <FaBloggerB />
               <span>Blog</span>
             </Navs>
-            <Navs>
+            <Navs to="/stocklist">
               <FaClipboardList />
               <span>Stocklist</span>
             </Navs>
-            <Navs>
+            <Navs to="/contact">
               <MdContacts />
               <span>Contact</span>
             </Navs>
@@ -99,7 +100,9 @@ const Navigations = styled.div`
     display: none;
   }
 `;
-const Navs = styled.div`
+const Navs = styled(NavLink)`
+  text-decoration: none;
+  color: #fff;
   font-size: 15px;
   font-weight: 600;
   display: flex;
@@ -112,8 +115,12 @@ const Navs = styled.div`
   }
 
   :hover {
-    color: #e4811c;
+    color: #e8bf0a;
     transform: scale(0.95);
+  }
+
+  &.active {
+    color: #ffb400;
   }
 `;
 
