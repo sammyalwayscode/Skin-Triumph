@@ -9,36 +9,72 @@ import {
 } from "react-icons/fa";
 import { AiTwotoneSkin } from "react-icons/ai";
 import { MdContacts } from "react-icons/md";
+import { NavLink } from "react-router-dom";
 
-const SideBar = () => {
+const SideBar = ({ setToggle, toggle }) => {
   return (
     <Container>
       <Wrapper>
-        <Navs>
+        <Navs
+          to="/"
+          onClick={() => {
+            setToggle(false);
+          }}
+        >
           <RiHomeSmileFill />
           <span>Home</span>
         </Navs>
-        <Navs>
+        <Navs
+          onClick={() => {
+            setToggle(false);
+          }}
+          to="/about"
+        >
           <FaLayerGroup />
           <span>About</span>
         </Navs>
-        <Navs>
+        <Navs
+          to="/products"
+          onClick={() => {
+            setToggle(false);
+          }}
+        >
           <AiTwotoneSkin />
           <span>Products</span>
         </Navs>
-        <Navs>
+        <Navs
+          to="/blog"
+          onClick={() => {
+            setToggle(false);
+          }}
+        >
           <FaBloggerB />
           <span>Blog</span>
         </Navs>
-        <Navs>
+        <Navs
+          to="/stocklist"
+          onClick={() => {
+            setToggle(false);
+          }}
+        >
           <FaClipboardList />
           <span>Stocklist</span>
         </Navs>
-        <Navs>
+        <Navs
+          to="/contact"
+          onClick={() => {
+            setToggle(false);
+          }}
+        >
           <MdContacts />
           <span>Contact</span>
         </Navs>
-        <CartDiv>
+        <CartDiv
+          to="/cart"
+          onClick={() => {
+            setToggle(false);
+          }}
+        >
           <FaShoppingCart />
           <span>Cart</span>
           <div>20</div>
@@ -61,7 +97,8 @@ const Container = styled.div`
   font-weight: 600;
 `;
 const Wrapper = styled.div``;
-const Navs = styled.div`
+const Navs = styled(NavLink)`
+  text-decoration: none;
   margin: 25px 0;
   color: #fff;
   display: flex;
@@ -69,19 +106,31 @@ const Navs = styled.div`
   /* justify-content: center; */
   align-items: center;
   :hover {
-    color: #e8bf0a;
+    color: #ffb400;
+  }
+
+  &.active {
+    color: #ffb400;
   }
 
   span {
     margin-left: 5px;
   }
 `;
-const CartDiv = styled.div`
+const CartDiv = styled(NavLink)`
   display: flex;
   font-size: 20px;
   color: #fff;
   justify-content: center;
   align-items: center;
+  text-decoration: none;
+  :hover {
+    color: #ffb400;
+  }
+
+  &.active {
+    color: #ffb400;
+  }
   span {
     margin-left: 5px;
   }

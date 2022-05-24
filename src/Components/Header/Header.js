@@ -53,7 +53,7 @@ const Header = () => {
               <MdContacts />
               <span>Contact</span>
             </Navs>
-            <CartDiv>
+            <CartDiv to="/cart">
               <FaShoppingCart />
             </CartDiv>
           </Navigations>
@@ -66,7 +66,7 @@ const Header = () => {
           </Side>
         </Wrapper>
       </Container>
-      {toggle ? <SideBar /> : null}
+      {toggle ? <SideBar setToggle={setToggle} toggle={toggle} /> : null}
     </>
   );
 };
@@ -124,9 +124,22 @@ const Navs = styled(NavLink)`
   }
 `;
 
-const CartDiv = styled.div`
+const CartDiv = styled(NavLink)`
   margin-left: 10px;
   font-size: 23px;
+  transition: all 350ms;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff;
+
+  :hover {
+    color: #e8bf0a;
+    transform: scale(0.95);
+  }
+
+  &.active {
+    color: #ffb400;
+  }
 `;
 
 const Side = styled.div`

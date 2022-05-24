@@ -87,7 +87,8 @@ const Wrapper = styled.div`
 const Title = styled.div`
   font-weight: 800;
   font-size: 30px;
-  color: #e8bf0a;
+  /* color: #e8bf0a; */
+  color: #ffb400;
   margin-bottom: 30px;
   text-align: center;
 
@@ -160,10 +161,11 @@ const OtherWatch = styled.div`
   width: 90%;
 `;
 const ProductTitle = styled.div`
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 800;
   text-align: center;
-  color: #e8bf0a;
+  /* color: #e8bf0a; */
+  color: #ffb400;
   transition: all 350ms;
   margin-bottom: 10px;
   cursor: pointer;
@@ -177,11 +179,10 @@ const Butons = styled.div`
   margin-bottom: 10px;
 `;
 const CartBut = styled.button`
-  height: 30px;
-  width: 120px;
+  padding: 5px 15px;
   background-color: #000;
   color: #fff;
-  font-size: 15px;
+  font-size: 13px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -200,7 +201,7 @@ const Price = styled.div`
   width: 120px;
   /* background-color: #000; */
   color: #000;
-  font-size: 15px;
+  font-size: 14px;
   display: flex;
   justify-content: flex-end;
   align-items: center;

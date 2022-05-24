@@ -59,7 +59,8 @@ const TitOne = styled.div`
   font-weight: bold;
   /* font-family: "Tapestry", cursive; */
   font-family: "Water Brush", cursive;
-  color: #e8bf0a;
+  /* color: #e8bf0a; */
+  color: #ffb400;
 `;
 const TitBrand = styled.div`
   font-size: 35px;

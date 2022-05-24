@@ -35,7 +35,8 @@ const Wrapper = styled.div`
 `;
 const Title = styled.div`
   font-size: 25px;
-  color: #e8bf0a;
+  /* color: #e8bf0a; */
+  color: #ffb400;
   font-weight: 800;
   margin-bottom: 10px;
   @media (max-width: 768px) {
