@@ -9,6 +9,7 @@ import Blog from "./Components/Blog/Blog";
 import Stocklist from "./Components/Stocklist/Stocklist";
 import Contact from "./Components/Contact/Contact";
 import Cart from "./Components/Cart/Cart";
+import Detail from "./Components/DetailPage/Detail";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/stocklist" element={<Stocklist />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/product/detail/:id" element={<Detail />} />
         </Routes>
         <Footer />
       </BrowserRouter>

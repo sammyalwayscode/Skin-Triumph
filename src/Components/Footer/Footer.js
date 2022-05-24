@@ -85,7 +85,7 @@ const Wrapper = styled.div`
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  margin: 80px 0;
+  margin: 100px 0;
 `;
 const FootOne = styled.div`
   width: 250px;
