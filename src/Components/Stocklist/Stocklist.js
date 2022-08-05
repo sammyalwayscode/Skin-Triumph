@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
 
 const Stocklist = () => {
   const stockData = [
@@ -29,34 +31,39 @@ const Stocklist = () => {
     },
   ];
   return (
-    <Container>
-      <HeroStock>Stocklist</HeroStock>
-      <Stores>
-        <MainStore>
-          <h2>Flagship Store</h2>
-          <ContentHold>
-            <div>Skin Triumph Stores - Olodi-Apapa</div>
-            <p>38 Ayebeng Street, Adenta Shopping Center, Adenta</p>
-            <p>Tel:+234 908 117 6026, +234 903 098 8589 </p>
-            <p>Email: info@afribeautycollective.com</p>
-            <p>Hours: Tuesday – Saturday 10am – 5:30 pm</p>
-          </ContentHold>
-        </MainStore>
+    <>
+      <Header />
 
-        <OtherStores>
-          <h2>Our Other Stores</h2>
-          {stockData?.map((props) => (
-            <ContentHold2 key={props.id}>
-              <div> {props.office} </div>
-              <p> {props.address} </p>
-              <p>Tel: {props.phone} </p>
-              <p>Email: {props.email} </p>
-              <p>Hours: {props.hours} </p>
-            </ContentHold2>
-          ))}
-        </OtherStores>
-      </Stores>
-    </Container>
+      <Container>
+        <HeroStock>Stocklist</HeroStock>
+        <Stores>
+          <MainStore>
+            <h2>Flagship Store</h2>
+            <ContentHold>
+              <div>Skin Triumph Stores - Olodi-Apapa</div>
+              <p>38 Ayebeng Street, Adenta Shopping Center, Adenta</p>
+              <p>Tel:+234 908 117 6026, +234 903 098 8589 </p>
+              <p>Email: info@afribeautycollective.com</p>
+              <p>Hours: Tuesday – Saturday 10am – 5:30 pm</p>
+            </ContentHold>
+          </MainStore>
+
+          <OtherStores>
+            <h2>Our Other Stores</h2>
+            {stockData?.map((props) => (
+              <ContentHold2 key={props.id}>
+                <div> {props.office} </div>
+                <p> {props.address} </p>
+                <p>Tel: {props.phone} </p>
+                <p>Email: {props.email} </p>
+                <p>Hours: {props.hours} </p>
+              </ContentHold2>
+            ))}
+          </OtherStores>
+        </Stores>
+      </Container>
+      <Footer />
+    </>
   );
 };
 

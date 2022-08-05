@@ -1,110 +1,114 @@
 import React from "react";
 import styled from "styled-components";
+import Header from "../Header/Header";
 
 const Products = () => {
   return (
-    <Container>
-      <ProductHero>
-        <HeroText>Go Through The Best Of Our Products</HeroText>
-      </ProductHero>
+    <>
+      <Header />
+      <Container>
+        <ProductHero>
+          <HeroText>Go Through The Best Of Our Products</HeroText>
+        </ProductHero>
 
-      <ProdCategory>
-        <Category>
-          <p>Product Category</p>
-          <input placeholder="Select a Category" />
-        </Category>
-        <Prodct>All Products</Prodct>
-      </ProdCategory>
-      <Wrapper>
-        <CardCtrl>
-          <ProductCard>
-            <ImgDiv>
-              <img src="./Images/img8.jpg" alt="" />
-            </ImgDiv>
-            <OtherWatch>
-              <ProductTitle>Hibiscus Bathing Soap Skin Enhancer</ProductTitle>
-              <Butons>
-                <CartBut>Add to Cart</CartBut>
-                <Price>N7,800.00</Price>
-              </Butons>
-              <ShortDescrib>
-                Skintriumph Hibiscus soap fight germs and bacterial from skin
-                surface, also fight germs that cause body odor and eczema.
-                <strong>Read More</strong>
-              </ShortDescrib>
-            </OtherWatch>
-          </ProductCard>
-          <ProductCard>
-            <ImgDiv>
-              <img src="./Images/img8.jpg" alt="" />
-            </ImgDiv>
-            <OtherWatch>
-              <ProductTitle>Hibiscus Bathing Soap Skin Enhancer</ProductTitle>
-              <Butons>
-                <CartBut>Add to Cart</CartBut>
-                <Price>N7,800.00</Price>
-              </Butons>
-              <ShortDescrib>
-                Skintriumph Hibiscus soap fight germs and bacterial from skin
-                surface, also fight germs that cause body odor and eczema.
-                <strong>Read More</strong>
-              </ShortDescrib>
-            </OtherWatch>
-          </ProductCard>
-          <ProductCard>
-            <ImgDiv>
-              <img src="./Images/img8.jpg" alt="" />
-            </ImgDiv>
-            <OtherWatch>
-              <ProductTitle>Hibiscus Bathing Soap Skin Enhancer</ProductTitle>
-              <Butons>
-                <CartBut>Add to Cart</CartBut>
-                <Price>N7,800.00</Price>
-              </Butons>
-              <ShortDescrib>
-                Skintriumph Hibiscus soap fight germs and bacterial from skin
-                surface, also fight germs that cause body odor and eczema.
-                <strong>Read More</strong>
-              </ShortDescrib>
-            </OtherWatch>
-          </ProductCard>
-          <ProductCard>
-            <ImgDiv>
-              <img src="./Images/img8.jpg" alt="" />
-            </ImgDiv>
-            <OtherWatch>
-              <ProductTitle>Hibiscus Bathing Soap Skin Enhancer</ProductTitle>
-              <Butons>
-                <CartBut>Add to Cart</CartBut>
-                <Price>N7,800.00</Price>
-              </Butons>
-              <ShortDescrib>
-                Skintriumph Hibiscus soap fight germs and bacterial from skin
-                surface, also fight germs that cause body odor and eczema.
-                <strong>Read More</strong>
-              </ShortDescrib>
-            </OtherWatch>
-          </ProductCard>
-          <ProductCard>
-            <ImgDiv>
-              <img src="./Images/img8.jpg" alt="" />
-            </ImgDiv>
-            <OtherWatch>
-              <ProductTitle>Hibiscus Bathing Soap Skin Enhancer</ProductTitle>
-              <Butons>
-                <CartBut>Add to Cart</CartBut>
-                <Price>N7,800.00</Price>
-              </Butons>
-              <ShortDescrib>
-                Skintriumph Hibiscus soap fight germs and bacterial from skin
-                surface, also fight germs that cause body odor and eczema.
-                <strong>Read More</strong>
-              </ShortDescrib>
-            </OtherWatch>
-          </ProductCard>
-        </CardCtrl>
-      </Wrapper>
-    </Container>
+        <ProdCategory>
+          <Category>
+            <p>Product Category</p>
+            <input placeholder="Select a Category" />
+          </Category>
+          <Prodct>All Products</Prodct>
+        </ProdCategory>
+        <Wrapper>
+          <CardCtrl>
+            <ProductCard>
+              <ImgDiv>
+                <img src="./Images/img8.jpg" alt="" />
+              </ImgDiv>
+              <OtherWatch>
+                <ProductTitle>Hibiscus Bathing Soap Skin Enhancer</ProductTitle>
+                <Butons>
+                  <CartBut>Add to Cart</CartBut>
+                  <Price>N7,800.00</Price>
+                </Butons>
+                <ShortDescrib>
+                  Skintriumph Hibiscus soap fight germs and bacterial from skin
+                  surface, also fight germs that cause body odor and eczema.
+                  <strong>Read More</strong>
+                </ShortDescrib>
+              </OtherWatch>
+            </ProductCard>
+            <ProductCard>
+              <ImgDiv>
+                <img src="./Images/img8.jpg" alt="" />
+              </ImgDiv>
+              <OtherWatch>
+                <ProductTitle>Hibiscus Bathing Soap Skin Enhancer</ProductTitle>
+                <Butons>
+                  <CartBut>Add to Cart</CartBut>
+                  <Price>N7,800.00</Price>
+                </Butons>
+                <ShortDescrib>
+                  Skintriumph Hibiscus soap fight germs and bacterial from skin
+                  surface, also fight germs that cause body odor and eczema.
+                  <strong>Read More</strong>
+                </ShortDescrib>
+              </OtherWatch>
+            </ProductCard>
+            <ProductCard>
+              <ImgDiv>
+                <img src="./Images/img8.jpg" alt="" />
+              </ImgDiv>
+              <OtherWatch>
+                <ProductTitle>Hibiscus Bathing Soap Skin Enhancer</ProductTitle>
+                <Butons>
+                  <CartBut>Add to Cart</CartBut>
+                  <Price>N7,800.00</Price>
+                </Butons>
+                <ShortDescrib>
+                  Skintriumph Hibiscus soap fight germs and bacterial from skin
+                  surface, also fight germs that cause body odor and eczema.
+                  <strong>Read More</strong>
+                </ShortDescrib>
+              </OtherWatch>
+            </ProductCard>
+            <ProductCard>
+              <ImgDiv>
+                <img src="./Images/img8.jpg" alt="" />
+              </ImgDiv>
+              <OtherWatch>
+                <ProductTitle>Hibiscus Bathing Soap Skin Enhancer</ProductTitle>
+                <Butons>
+                  <CartBut>Add to Cart</CartBut>
+                  <Price>N7,800.00</Price>
+                </Butons>
+                <ShortDescrib>
+                  Skintriumph Hibiscus soap fight germs and bacterial from skin
+                  surface, also fight germs that cause body odor and eczema.
+                  <strong>Read More</strong>
+                </ShortDescrib>
+              </OtherWatch>
+            </ProductCard>
+            <ProductCard>
+              <ImgDiv>
+                <img src="./Images/img8.jpg" alt="" />
+              </ImgDiv>
+              <OtherWatch>
+                <ProductTitle>Hibiscus Bathing Soap Skin Enhancer</ProductTitle>
+                <Butons>
+                  <CartBut>Add to Cart</CartBut>
+                  <Price>N7,800.00</Price>
+                </Butons>
+                <ShortDescrib>
+                  Skintriumph Hibiscus soap fight germs and bacterial from skin
+                  surface, also fight germs that cause body odor and eczema.
+                  <strong>Read More</strong>
+                </ShortDescrib>
+              </OtherWatch>
+            </ProductCard>
+          </CardCtrl>
+        </Wrapper>
+      </Container>
+    </>
   );
 };
 

@@ -1,62 +1,70 @@
 import React from "react";
 import styled from "styled-components";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
 
 const Detail = () => {
   return (
-    <Container>
-      <Wrapper>
-        <ImageDiv>
-          <img src="/Images/img8.jpg" alt="" />
-        </ImageDiv>
-        <TextDetail>
-          <Title>STRETCH MARK BODY CREAM</Title>
-          <Price>
-            {" "}
-            <strong>Price:</strong> <i>N12, 300</i>{" "}
-          </Price>
-          <Content>
-            <p>
-              Stretch marks is the cause of skin breakage in many individuals
-              and a lot of product claim to treat this condition but we use a
-              different approach to get result to this condition since we
-              understand the first cause of stretch marks on skin. Stretch marks
-              are the inability of the skin to returned back to its previous
-              structure and formation this is mostly caused by after child
-              birth, bleaching process and whitening creams, increased in body
-              mass index all these are external factors and environmental
-              factors also, internal factors can stretch marks such as reduction
-              in collagen and elastin a type of skin protein that gives the skin
-              it firmness and edacity of stretching front and back.
-            </p>
-            <p>
-              This product contains 28 minerals such mustard seed oil,bay leave
-              and essential oils that was developed by our chemists. In this
-              formulation both the external and internal factors are taken care
-              of by balancing both making our product unique and result
-              orientated in treating stretch mark challenges ,our product gives
-              immediate results right from day one of application without delay
-              giving you a increased in collagen and elastin returning the skin
-              to its original state.
-            </p>
-            <p>
-              The uniqueness of this product was source from areas known to
-              achieve results in skin stretching this product merge the barrier
-              caused by external and internal factor by replacing the lost
-              nutrients and increased the skin protein. This product is one of
-              its kinds as it is proven to work immensely for all skin type
-            </p>
-          </Content>
-          <MoreBtn>
-            <QuantityDiv>
-              <CaclQuanty>+</CaclQuanty>
-              <MainQuantity>2</MainQuantity>
-              <CaclQuanty bg>-</CaclQuanty>
-            </QuantityDiv>
-            <CartAddBtn>Add To Cart</CartAddBtn>
-          </MoreBtn>
-        </TextDetail>
-      </Wrapper>
-    </Container>
+    <>
+      <Header />
+      <Container>
+        <Wrapper>
+          <ImageDiv>
+            <img src="/Images/img8.jpg" alt="" />
+          </ImageDiv>
+          <TextDetail>
+            <Title>STRETCH MARK BODY CREAM</Title>
+            <Price>
+              {" "}
+              <strong>Price:</strong> <i>N12, 300</i>{" "}
+            </Price>
+            <Content>
+              <p>
+                Stretch marks is the cause of skin breakage in many individuals
+                and a lot of product claim to treat this condition but we use a
+                different approach to get result to this condition since we
+                understand the first cause of stretch marks on skin. Stretch
+                marks are the inability of the skin to returned back to its
+                previous structure and formation this is mostly caused by after
+                child birth, bleaching process and whitening creams, increased
+                in body mass index all these are external factors and
+                environmental factors also, internal factors can stretch marks
+                such as reduction in collagen and elastin a type of skin protein
+                that gives the skin it firmness and edacity of stretching front
+                and back.
+              </p>
+              <p>
+                This product contains 28 minerals such mustard seed oil,bay
+                leave and essential oils that was developed by our chemists. In
+                this formulation both the external and internal factors are
+                taken care of by balancing both making our product unique and
+                result orientated in treating stretch mark challenges ,our
+                product gives immediate results right from day one of
+                application without delay giving you a increased in collagen and
+                elastin returning the skin to its original state.
+              </p>
+              <p>
+                The uniqueness of this product was source from areas known to
+                achieve results in skin stretching this product merge the
+                barrier caused by external and internal factor by replacing the
+                lost nutrients and increased the skin protein. This product is
+                one of its kinds as it is proven to work immensely for all skin
+                type
+              </p>
+            </Content>
+            <MoreBtn>
+              <QuantityDiv>
+                <CaclQuanty>+</CaclQuanty>
+                <MainQuantity>2</MainQuantity>
+                <CaclQuanty bg>-</CaclQuanty>
+              </QuantityDiv>
+              <CartAddBtn>Add To Cart</CartAddBtn>
+            </MoreBtn>
+          </TextDetail>
+        </Wrapper>
+      </Container>
+      <Footer />
+    </>
   );
 };
 
