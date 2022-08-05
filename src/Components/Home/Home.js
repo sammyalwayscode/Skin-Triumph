@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
 import Hero from "./HeroPage/Hero";
 import Home1 from "./Home1/Home1";
 import Home2 from "./Home2/Home2";
@@ -11,16 +13,20 @@ import Home6 from "./Home6/Home6";
 
 const Home = () => {
   return (
-    <Container>
-      <Hero />
-      <Home1 />
-      <Home2 />
-      <Home3 />
-      <Home4 />
-      <Home3b />
-      <Home5 />
-      <Home6 />
-    </Container>
+    <>
+      <Header />
+      <Container>
+        <Hero />
+        <Home1 />
+        <Home2 />
+        <Home3 />
+        <Home4 />
+        <Home3b />
+        <Home5 />
+        <Home6 />
+      </Container>
+      <Footer />
+    </>
   );
 };
 
