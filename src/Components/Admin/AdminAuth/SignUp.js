@@ -1,16 +1,85 @@
-import React from "react";
-// import { ImBooks } from "react-icons/im";
+import React, { useState } from "react";
 import styled from "styled-components";
-// import * as yup from "yup";
-// import { useForm } from "react-hook-form";
-// import { yupResolver } from "@hookform/resolvers/yup";
-// import axios from "axios";
-// import swal from "sweetalert";
-import { NavLink } from "react-router-dom";
-// import HashLoader from "react-spinners/HashLoader";
-// import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { NavLink, useNavigate } from "react-router-dom";
+import avat from "../Img/ava.gif";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const [image, setImage] = useState(avat);
+  const [avatar, setAvatar] = useState("");
+
+  const formHandle = yup.object().shape({
+    name: yup.string().required("Your Name is A Required Field"),
+    email: yup.string().email().required("Email is a Required Field"),
+    password: yup.string().required("Password Is a Required Field"),
+    confirm: yup
+      .string()
+      .oneOf([yup.ref("password"), null], "Password Dose Not Match"),
+  });
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
+    resolver: yupResolver(formHandle),
+  });
+
+  const handleImage = async (e) => {
+    const file = e.target.files[0];
+    const save = URL.createObjectURL(file);
+    setImage(save);
+    setAvatar(file);
+  };
+
+  const formSummit = handleSubmit(async (value) => {
+    const { name, email, password } = value;
+    const mainURL = "http://localhost:2221";
+    const URL = `${mainURL}/api/admin/signup`;
+    console.log(value);
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("avatarImg", avatar);
+
+    const config = {
+      "content-type": "multipart/form-data",
+    };
+
+    await axios
+      .post(URL, formData, config)
+      .then((res) => {
+        console.log(res.data.data);
+
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Account Created Sucessfully",
+          showConfirmButton: false,
+          timer: 2500,
+        }).then(() => {
+          navigate("/admin/toverify");
+        });
+        // setLoading(false)
+      })
+      .catch((error) => {
+        new Swal({
+          title: error.response.data.message,
+          text: `Please Check and Fix this ERROR`,
+          icon: "error",
+          showConfirmButton: false,
+          timer: 3500,
+        }).then(() => {
+          // setLoading(false)
+        });
+      });
+  });
   return (
     <Container>
       <Wrapper>
@@ -18,43 +87,53 @@ const SignUp = () => {
           <MainTitle>
             <Title>Skin Triumph</Title>
 
-            <SubTitle>
-              Elegance in your skincare, concept by{" "}
-              <strong>OLORUNDA SAMUEL</strong>{" "}
-            </SubTitle>
+            <SubTitle>Elegance in your skincare</SubTitle>
           </MainTitle>
 
-          <SignUpHold onSubmit={""} type="multipart/form-data">
+          <SignUpHold onSubmit={formSummit} type="multipart/form-data">
             <ImageHolder>
               <PrevImgDiv>
-                <img src="" alt="" />
+                <img src={image} alt="" />
               </PrevImgDiv>
               <ImageLabel htmlFor="pix">Upload your Image</ImageLabel>
-              <ImageInput onChange="" id="pix" type="file" accept="image/*" />
+              <ImageInput
+                onChange={handleImage}
+                id="pix"
+                type="file"
+                accept="image/*"
+              />
             </ImageHolder>
 
             <InputCtrl>
-              <span>User Name</span>
-              <input placeholder="Enter Your UserName" />
-              <Error> error </Error>
+              <span>Admin Name</span>
+              <input placeholder="Enter Your UserName" {...register("name")} />
+              <Error> {errors.name?.message} </Error>
             </InputCtrl>
             <InputCtrl>
               <span>Your Email</span>
-              <input placeholder="Enter Your Email Address" />
-              <Error> error </Error>
+              <input
+                placeholder="Enter Your Email Address"
+                {...register("email")}
+              />
+              <Error> {errors.email?.message} </Error>
             </InputCtrl>
             <InputCtrl>
               <span>Password</span>
               <input
                 type="password"
                 placeholder="Create a Super Meroable Password"
+                {...register("password")}
               />
-              <Error> error </Error>
+              <Error> {errors.password?.message} </Error>
             </InputCtrl>
             <InputCtrl>
               <span>Confirm Password</span>
-              <input type="password" placeholder="Confirm Your Password" />
-              <Error> error </Error>
+              <input
+                type="password"
+                placeholder="Confirm Your Password"
+                {...register("confirm")}
+              />
+              <Error> {errors.confirm?.message} </Error>
             </InputCtrl>
             <Button>
               <button type="submit">Sign Up</button>
