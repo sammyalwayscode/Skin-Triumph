@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { IoLogoBitbucket, IoNotifications, IoSearch } from "react-icons/io5";
 import { SiMinutemailer } from "react-icons/si";
 import { HiMenuAlt1 } from "react-icons/hi";
-import { GlobalState } from "../../ContexGlobal/Global";
+import { GlobalState } from "../../../ContexGlobal/Global";
 
 const Header = () => {
   const { mobHandler } = useContext(GlobalState);

@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import DashBoard from "./Dashboard/DashBoard";
-import SideBar from "./SideBar/SideBar";
+import Header from "../../Header/Header";
+import SideBar from "../../SideBar/SideBar";
 
 const Home = () => {
   return (
     <Container>
+      <Header />
       <SideBar />
-      <DashBoard />
     </Container>
   );
 };

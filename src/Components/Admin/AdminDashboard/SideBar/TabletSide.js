@@ -8,15 +8,19 @@ import {
 import { GiTeacher } from "react-icons/gi";
 import { IoIosPeople } from "react-icons/io";
 import { RiParentLine } from "react-icons/ri";
-import { MdAccountTree, MdSubject } from "react-icons/md";
 import { SiGoogleclassroom } from "react-icons/si";
-import { VscCompassActive } from "react-icons/vsc";
 import { HiPresentationChartBar } from "react-icons/hi";
 import { BsCalendar2EventFill } from "react-icons/bs";
 import { FaPowerOff } from "react-icons/fa";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { signOut } from "../../../Global/GlobalState";
 
 const TabletSide = () => {
   const [tabDiaplay, setTabDisplay] = useState(true);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const tabDiaplayHandler = () => {
     setTabDisplay(!tabDiaplay);
@@ -32,61 +36,51 @@ const TabletSide = () => {
               <AiOutlineMenuUnfold />
             </TabBar>
             <NavIconCtrl>
-              <MainIconNav style={{ backgroundColor: "#ffa301" }}>
-                <IconNav style={{ color: "#fff" }}>
+              <MainIconNav to="/overview">
+                <IconNav>
                   <AiFillDashboard />
                 </IconNav>
               </MainIconNav>
-              <MainIconNav>
+              <MainIconNav to="/customers">
                 <IconNav>
                   <GiTeacher />
                 </IconNav>
               </MainIconNav>
-              <MainIconNav>
+              <MainIconNav to="/uploadproducts">
                 <IconNav>
                   <IoIosPeople />
                 </IconNav>
               </MainIconNav>
-              <MainIconNav>
+              <MainIconNav to="/boardproducts">
                 <IconNav>
                   <RiParentLine />
                 </IconNav>
               </MainIconNav>
-              <MainIconNav>
-                <IconNav>
-                  <MdAccountTree />
-                </IconNav>
-              </MainIconNav>
-              <MainIconNav>
+              <MainIconNav to="/orders">
                 <IconNav>
                   <SiGoogleclassroom />
                 </IconNav>
               </MainIconNav>
-              <MainIconNav>
-                <IconNav>
-                  <MdSubject />
-                </IconNav>
-              </MainIconNav>
-              <MainIconNav>
-                <IconNav>
-                  <VscCompassActive />
-                </IconNav>
-              </MainIconNav>
-              <MainIconNav>
+              <MainIconNav to="/boardblogs">
                 <IconNav>
                   <HiPresentationChartBar />
                 </IconNav>
               </MainIconNav>
-              <MainIconNav>
+              <MainIconNav to="/boardstocklist">
                 <IconNav>
                   <BsCalendar2EventFill />
                 </IconNav>
               </MainIconNav>
-              <MainIconNav>
+              <MainIconNavOut
+                onClick={() => {
+                  dispatch(signOut());
+                  navigate("/");
+                }}
+              >
                 <IconNav>
                   <FaPowerOff />
                 </IconNav>
-              </MainIconNav>
+              </MainIconNavOut>
             </NavIconCtrl>
           </TabDisplayWrapper>
         </TabDisplayContainer>
@@ -97,94 +91,75 @@ const TabletSide = () => {
               <AiOutlineMenuFold />
             </Bar>
             <NavsCtrl>
-              <MainNav style={{ backgroundColor: " #ffa301" }}>
+              <MainNav to="/overview">
                 <Nav>
-                  <IconHold style={{ color: "#fff" }}>
+                  <IconHold>
                     <AiFillDashboard />
                   </IconHold>
-                  <span>Dashboard</span>
+                  <span>Overviwe</span>
                 </Nav>
               </MainNav>
-              <MainNav>
+              <MainNav to="/customers">
                 <Nav>
                   <IconHold>
                     <GiTeacher />
                   </IconHold>
-                  <span>Teachers</span>
+                  <span>Costomers</span>
                 </Nav>
               </MainNav>
-              <MainNav>
+              <MainNav to="/uploadproducts">
                 <Nav>
                   <IconHold>
                     <IoIosPeople />
                   </IconHold>
-                  <span>Students</span>
+                  <span>Upload Products</span>
                 </Nav>
               </MainNav>
-              <MainNav>
+              <MainNav to="/boardproducts">
                 <Nav>
                   <IconHold>
                     <RiParentLine />
                   </IconHold>
-                  <span>Parents</span>
+                  <span>Products</span>
                 </Nav>
               </MainNav>
-              <MainNav>
-                <Nav>
-                  <IconHold>
-                    <MdAccountTree />
-                  </IconHold>
-                  <span>Account</span>
-                </Nav>
-              </MainNav>
-              <MainNav>
+              <MainNav to="/orders">
                 <Nav>
                   <IconHold>
                     <SiGoogleclassroom />
                   </IconHold>
-                  <span>Class</span>
+                  <span>Orders</span>
                 </Nav>
               </MainNav>
-              <MainNav>
-                <Nav>
-                  <IconHold>
-                    <MdSubject />
-                  </IconHold>
-                  <span>Subjects</span>
-                </Nav>
-              </MainNav>
-              <MainNav>
-                <Nav>
-                  <IconHold>
-                    <VscCompassActive />
-                  </IconHold>
-                  <span>Class Routine</span>
-                </Nav>
-              </MainNav>
-              <MainNav>
+              <MainNav to="/boardblogs">
                 <Nav>
                   <IconHold>
                     <HiPresentationChartBar />
                   </IconHold>
-                  <span>Attendance</span>
+                  <span>Blogs</span>
                 </Nav>
               </MainNav>
-              <MainNav>
+              <MainNav to="/boardstocklist">
                 <Nav>
                   <IconHold>
-                    <BsCalendar2EventFill />
+                    <HiPresentationChartBar />
                   </IconHold>
-                  <span>Events</span>
+                  <span>Stocklist</span>
                 </Nav>
               </MainNav>
-              <MainNav>
+              <MainNavOut
+                onClick={() => {
+                  dispatch(signOut());
+                  navigate("/");
+                }}
+              >
                 <Nav>
                   <IconHold>
                     <FaPowerOff />
                   </IconHold>
                   <span>Log Out</span>
                 </Nav>
-              </MainNav>
+              </MainNavOut>
             </NavsCtrl>
           </WrapperDiaplay>
         </ContainerDisplay>
@@ -202,8 +177,9 @@ const TabDisplayContainer = styled.div`
     margin-top: 50px;
     min-height: calc(100vh - 50px);
     /* background-color: hotpink; */
-    background-color: #031e3e;
+    background-color: #000;
     width: 50px;
+    position: fixed;
   }
 
   @media (max-width: 500px) {
@@ -219,9 +195,9 @@ const ContainerDisplay = styled.div`
     margin-top: 50px;
     min-height: calc(100vh - 50px);
     /* background-color: gold; */
-    background-color: #031e3e;
+    background-color: #000;
     width: 180px;
-    position: absolute;
+    position: fixed;
     font-family: poppins;
   }
 
@@ -240,12 +216,24 @@ const TabBar = styled.div`
 `;
 
 const NavIconCtrl = styled.div``;
-const MainIconNav = styled.div`
+const MainIconNav = styled(NavLink)`
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.active {
+    background-color: #ffa301;
+  }
+`;
+
+const MainIconNavOut = styled.div`
   height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
+
 const IconNav = styled.div`
   font-size: 20px;
   color: #ffa301;
@@ -260,15 +248,25 @@ const Bar = styled.div`
 `;
 
 const NavsCtrl = styled.div``;
-const MainNav = styled.div`
+const MainNav = styled(NavLink)`
+  text-decoration: none;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 40px;
-  /* border-top: 1px solid gray; */
-  /* border-bottom: 1px solid gray; */
 
   cursor: pointer;
+
+  &.active {
+    background-color: #ffa301;
+  }
+`;
+
+const MainNavOut = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
 `;
 
 const IconHold = styled.section`
