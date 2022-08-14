@@ -1,7 +1,65 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
+import { createAdmin } from "../../Global/GlobalState";
+import Swal from "sweetalert2";
+
 const SignIn = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const formSchema = yup.object().shape({
+    email: yup.string().email().required("Your Email is Required"),
+    password: yup.string().required("Your Password is Required"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(formSchema),
+  });
+
+  const onSubmit = handleSubmit(async (value) => {
+    console.log(value);
+    const { email, password } = value;
+    const mainURL = "http://localhost:2221";
+    const URL = `${mainURL}/api/admin/signin`;
+
+    await axios
+      .post(URL, { email, password })
+      .then((res) => {
+        console.log(res.data.data);
+        dispatch(createAdmin(res.data.data));
+
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Welcome",
+          showConfirmButton: false,
+          timer: 2500,
+        }).then(() => {
+          navigate("/overview");
+        });
+      })
+      .catch((error) => {
+        new Swal({
+          title: error.response.data.message,
+          text: `Please Check and Fix this ERROR`,
+          icon: "error",
+          showConfirmButton: false,
+          timer: 3500,
+        }).then(() => {
+          // setLoading(false)
+        });
+      });
+  });
   return (
     <Container>
       <Wrapper>
@@ -9,22 +67,26 @@ const SignIn = () => {
           <MainTitle>
             <Title>Skin Triumph</Title>
 
-            <SubTitle>
-              Elegance in your skincare, concept by{" "}
-              <strong>OLORUNDA SAMUEL</strong>{" "}
-            </SubTitle>
+            <SubTitle>Elegance in your skincare</SubTitle>
           </MainTitle>
 
-          <SignInHold>
+          <SignInHold onSubmit={onSubmit}>
             <InputCtrl>
               <span>Your Email</span>
-              <input placeholder="Enter Your Email Address" />
-              <Error> error </Error>
+              <input
+                placeholder="Enter Your Email Address"
+                {...register("email")}
+              />
+              <Error> {errors.email?.message} </Error>
             </InputCtrl>
             <InputCtrl>
               <span>Password</span>
-              <input type="password" placeholder="Enter Your Password" />
-              <Error> error</Error>
+              <input
+                type="password"
+                placeholder="Enter Your Password"
+                {...register("password")}
+              />
+              <Error> {errors.password?.message}</Error>
             </InputCtrl>
             <Button>
               <button type="submit">Sign In</button>
