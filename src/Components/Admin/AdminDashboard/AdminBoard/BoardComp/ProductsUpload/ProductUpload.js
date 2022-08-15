@@ -1,36 +1,165 @@
-import React from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Swal from "sweetalert2";
+import * as yup from "yup";
+import upl from "../../../../Img/FGGG.jpg";
 
 const ProductUpload = () => {
+  const navigate = useNavigate();
+  const [image, setImage] = useState(upl);
+  const [avatar, setAvatar] = useState("");
+
+  const handleForm = yup.object().shape({
+    productName: yup.string().required("A Product name is Needed"),
+    category: yup.string().required("Please Select a Category"),
+    price: yup.number().required("A Price Is Required"),
+    shortDescription: yup
+      .string()
+      .max(120)
+      .required("Please Input a Short Description"),
+    productDescription: yup.string().required("Full Detaild Required"),
+  });
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
+    resolver: yupResolver(handleForm),
+  });
+
+  const handleImage = async (e) => {
+    const file = e.target.files[0];
+    const save = URL.createObjectURL(file);
+    setImage(save);
+    setAvatar(file);
+  };
+
+  const onSummitProduct = handleSubmit(async (value) => {
+    const {
+      productName,
+      category,
+      price,
+      shortDescription,
+      productDescription,
+    } = value;
+    const mainURL = "http://localhost:2221";
+    const URL = `${mainURL}/api/product/uploadProduct`;
+    console.log(value);
+
+    const formData = new FormData();
+    formData.append("productName", productName);
+    formData.append("category", category);
+    formData.append("price", price);
+    formData.append("shortDescription", shortDescription);
+    formData.append("productDescription", productDescription);
+    formData.append("avatar", avatar);
+
+    const config = {
+      "content-type": "multipart/form-data",
+    };
+
+    await axios
+      .post(URL, formData, config)
+      .then((res) => {
+        console.log(res.data.data);
+
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Product Uploaded",
+          showConfirmButton: false,
+          timer: 2500,
+        }).then(() => {
+          navigate("/boardproducts");
+        });
+      })
+      .catch((error) => {
+        new Swal({
+          title: error.response.data.message,
+          text: `Please Check and Fix this ERROR`,
+          icon: "error",
+          showConfirmButton: false,
+          timer: 3500,
+        }).then(() => {
+          // setLoading(false)
+        });
+      });
+  });
+
   return (
     <Container>
       <Wrapper>
-        <Card onSubmit={""}>
+        <Card onSubmit={onSummitProduct} type="multipart/form-data">
           <MainTitle>
             <Title>Skintriumph</Title>
           </MainTitle>
           <CreateHold>
             <ImageHolder>
               <PrevImgDiv>
-                <img src={""} alt="" />
+                <img src={image} alt="" />
               </PrevImgDiv>
-              <ImageLabel htmlFor="pix">Upload your Image</ImageLabel>
-              <ImageInput id="pix" type="file" accept="image/*" onChange={""} />
+              <ImageLabel htmlFor="pix">Upload an Image</ImageLabel>
+              <ImageInput
+                id="pix"
+                type="file"
+                accept="image/*"
+                onChange={handleImage}
+              />
             </ImageHolder>
 
             <InputCtrl>
-              <span>Title</span>
-              <input placeholder="What's the title of your notes" />
-              <Error> error </Error>
+              <span>Product Name</span>
+              <input
+                placeholder="e.g Body Cream"
+                {...register("productName")}
+              />
+              <Error> {errors.productName?.message} </Error>
             </InputCtrl>
             <InputCtrl>
-              <span>Notes</span>
-              <textarea placeholder="Write your Notes Here" />
-              <Error> error </Error>
+              <span>Category</span>
+              <select {...register("category")}>
+                <option>Soap</option>
+                <option>Body Wash</option>
+                <option>Scrubes</option>
+                <option>Creame</option>
+                <option>Face Corrector</option>
+                <option>Strech Mark</option>
+              </select>
+              <Error> {errors.category?.message} </Error>
+            </InputCtrl>
+            <InputCtrl>
+              <span>Price</span>
+              <input
+                type="number"
+                placeholder="e.g 12,000"
+                {...register("price")}
+              />
+              <Error> {errors.price?.message} </Error>
+            </InputCtrl>
+            <InputCtrl>
+              <span>Short Description</span>
+              <textarea
+                placeholder="A Pet Talk About The Product"
+                {...register("shortDescription")}
+              />
+              <Error> {errors.shortDescription?.message} </Error>
+            </InputCtrl>
+            <InputCtrl>
+              <span>Full Details</span>
+              <textarea
+                placeholder="All you want Users to Know about the Product"
+                {...register("productDescription")}
+              />
+              <Error> {errors.productDescription?.message} </Error>
             </InputCtrl>
           </CreateHold>
           <Button>
-            <button type="submit">Create Diary</button>
+            <button type="submit">Upload Product</button>
           </Button>
         </Card>
       </Wrapper>
@@ -101,16 +230,16 @@ const Title = styled.div`
 
 const CreateHold = styled.div``;
 const PrevImgDiv = styled.div`
-  height: 80px;
-  width: 80px;
+  height: 130px;
+  width: 90%;
   background-color: aqua;
-  border-radius: 50%;
+  border-radius: 10px;
   margin: 10px 0;
 
   img {
     height: 100%;
     width: 100%;
-    border-radius: 50%;
+    border-radius: 10px;
     object-fit: cover;
   }
 `;
@@ -159,6 +288,13 @@ const InputCtrl = styled.div`
     font-family: poppins;
   }
 
+  select {
+    height: 30px;
+    width: 300px;
+    font-family: poppins;
+    margin-bottom: 15px;
+  }
+
   textarea {
     height: 100px;
     font-family: poppins;
@@ -178,8 +314,7 @@ const Button = styled.div`
   margin: 10px 0;
 
   button {
-    height: 32px;
-    width: 130px;
+    padding: 6px 15px;
     font-family: poppins;
     font-weight: 600;
     background-color: #ff9505;
