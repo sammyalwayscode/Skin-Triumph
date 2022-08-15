@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { RiDeleteBack2Line } from "react-icons/ri";
+import { useSelector } from "react-redux";
 
 const ItemCart = () => {
+  const getCart = useSelector((state) => state.cart);
   return (
     <Container>
       <Hero>
@@ -10,183 +12,34 @@ const ItemCart = () => {
         <Cc>Hear's Your Cart</Cc>{" "}
       </Hero>
       <Wrapper>
-        <ShoppingCartDiv>
-          <ShopingCartHold>
-            {" "}
-            <ImageDiv>
+        {getCart?.map((props) => (
+          <ShoppingCartDiv>
+            <ShopingCartHold>
               {" "}
-              <img src="/Images/img8.jpg" alt="" />{" "}
-            </ImageDiv>
-            <ItemName>Skin Triumph Strech Mark Cream</ItemName>
-            <ItemPrice>
-              {" "}
-              <strong>Item Price:</strong> N3,700.00
-            </ItemPrice>
-            <QuantityDiv>
-              <CaclQuanty>+</CaclQuanty>
-              <MainQuantity>2</MainQuantity>
-              <CaclQuanty bg>-</CaclQuanty>
-            </QuantityDiv>
-            <ItemTotalPriceDiv>
-              {" "}
-              <strong>TIP:</strong> N7,400.00
-            </ItemTotalPriceDiv>
-            <DeleteIcon />
-          </ShopingCartHold>
-          <Line />
-        </ShoppingCartDiv>
-        <ShoppingCartDiv>
-          <ShopingCartHold>
-            {" "}
-            <ImageDiv>
-              {" "}
-              <img src="/Images/img8.jpg" alt="" />{" "}
-            </ImageDiv>
-            <ItemName>Skin Triumph Strech Mark Cream</ItemName>
-            <ItemPrice>N3,700.00</ItemPrice>
-            <QuantityDiv>
-              <CaclQuanty>+</CaclQuanty>
-              <MainQuantity>2</MainQuantity>
-              <CaclQuanty bg>-</CaclQuanty>
-            </QuantityDiv>
-            <ItemTotalPriceDiv>N7,400.00</ItemTotalPriceDiv>
-            <DeleteIcon />
-          </ShopingCartHold>
-          <Line />
-        </ShoppingCartDiv>
-        <ShoppingCartDiv>
-          <ShopingCartHold>
-            {" "}
-            <ImageDiv>
-              {" "}
-              <img src="/Images/img8.jpg" alt="" />{" "}
-            </ImageDiv>
-            <ItemName>Skin Triumph Strech Mark Cream</ItemName>
-            <ItemPrice>N3,700.00</ItemPrice>
-            <QuantityDiv>
-              <CaclQuanty>+</CaclQuanty>
-              <MainQuantity>2</MainQuantity>
-              <CaclQuanty bg>-</CaclQuanty>
-            </QuantityDiv>
-            <ItemTotalPriceDiv>N7,400.00</ItemTotalPriceDiv>
-            <DeleteIcon />
-          </ShopingCartHold>
-          <Line />
-        </ShoppingCartDiv>
-        <ShoppingCartDiv>
-          <ShopingCartHold>
-            {" "}
-            <ImageDiv>
-              {" "}
-              <img src="/Images/img8.jpg" alt="" />{" "}
-            </ImageDiv>
-            <ItemName>Skin Triumph Strech Mark Cream</ItemName>
-            <ItemPrice>N3,700.00</ItemPrice>
-            <QuantityDiv>
-              <CaclQuanty>+</CaclQuanty>
-              <MainQuantity>2</MainQuantity>
-              <CaclQuanty bg>-</CaclQuanty>
-            </QuantityDiv>
-            <ItemTotalPriceDiv>N7,400.00</ItemTotalPriceDiv>
-            <DeleteIcon />
-          </ShopingCartHold>
-          <Line />
-        </ShoppingCartDiv>
-        <ShoppingCartDiv>
-          <ShopingCartHold>
-            {" "}
-            <ImageDiv>
-              {" "}
-              <img src="/Images/img8.jpg" alt="" />{" "}
-            </ImageDiv>
-            <ItemName>Skin Triumph Strech Mark Cream</ItemName>
-            <ItemPrice>N3,700.00</ItemPrice>
-            <QuantityDiv>
-              <CaclQuanty>+</CaclQuanty>
-              <MainQuantity>2</MainQuantity>
-              <CaclQuanty bg>-</CaclQuanty>
-            </QuantityDiv>
-            <ItemTotalPriceDiv>N7,400.00</ItemTotalPriceDiv>
-            <DeleteIcon />
-          </ShopingCartHold>
-          <Line />
-        </ShoppingCartDiv>
-        <ShoppingCartDiv>
-          <ShopingCartHold>
-            {" "}
-            <ImageDiv>
-              {" "}
-              <img src="/Images/img8.jpg" alt="" />{" "}
-            </ImageDiv>
-            <ItemName>Skin Triumph Strech Mark Cream</ItemName>
-            <ItemPrice>N3,700.00</ItemPrice>
-            <QuantityDiv>
-              <CaclQuanty>+</CaclQuanty>
-              <MainQuantity>2</MainQuantity>
-              <CaclQuanty bg>-</CaclQuanty>
-            </QuantityDiv>
-            <ItemTotalPriceDiv>N7,400.00</ItemTotalPriceDiv>
-            <DeleteIcon />
-          </ShopingCartHold>
-          <Line />
-        </ShoppingCartDiv>
-        <ShoppingCartDiv>
-          <ShopingCartHold>
-            {" "}
-            <ImageDiv>
-              {" "}
-              <img src="/Images/img8.jpg" alt="" />{" "}
-            </ImageDiv>
-            <ItemName>Skin Triumph Strech Mark Cream</ItemName>
-            <ItemPrice>N3,700.00</ItemPrice>
-            <QuantityDiv>
-              <CaclQuanty>+</CaclQuanty>
-              <MainQuantity>2</MainQuantity>
-              <CaclQuanty bg>-</CaclQuanty>
-            </QuantityDiv>
-            <ItemTotalPriceDiv>N7,400.00</ItemTotalPriceDiv>
-            <DeleteIcon />
-          </ShopingCartHold>
-          <Line />
-        </ShoppingCartDiv>
-        <ShoppingCartDiv>
-          <ShopingCartHold>
-            {" "}
-            <ImageDiv>
-              {" "}
-              <img src="/Images/img8.jpg" alt="" />{" "}
-            </ImageDiv>
-            <ItemName>Skin Triumph Strech Mark Cream</ItemName>
-            <ItemPrice>N3,700.00</ItemPrice>
-            <QuantityDiv>
-              <CaclQuanty>+</CaclQuanty>
-              <MainQuantity>2</MainQuantity>
-              <CaclQuanty bg>-</CaclQuanty>
-            </QuantityDiv>
-            <ItemTotalPriceDiv>N7,400.00</ItemTotalPriceDiv>
-            <DeleteIcon />
-          </ShopingCartHold>
-          <Line />
-        </ShoppingCartDiv>
-        <ShoppingCartDiv>
-          <ShopingCartHold>
-            {" "}
-            <ImageDiv>
-              {" "}
-              <img src="/Images/img8.jpg" alt="" />{" "}
-            </ImageDiv>
-            <ItemName>Skin Triumph Strech Mark Cream</ItemName>
-            <ItemPrice>N3,700.00</ItemPrice>
-            <QuantityDiv>
-              <CaclQuanty>+</CaclQuanty>
-              <MainQuantity>2</MainQuantity>
-              <CaclQuanty bg>-</CaclQuanty>
-            </QuantityDiv>
-            <ItemTotalPriceDiv>N7,400.00</ItemTotalPriceDiv>
-            <DeleteIcon />
-          </ShopingCartHold>
-          <Line />
-        </ShoppingCartDiv>
+              <ImageDiv>
+                {" "}
+                <img src={props.avatar} alt="" />{" "}
+              </ImageDiv>
+              <ItemName>{props.productName} </ItemName>
+              <ItemPrice>
+                {" "}
+                <strong>Item Price:</strong>
+                {props.price}
+              </ItemPrice>
+              <QuantityDiv>
+                <CaclQuanty>+</CaclQuanty>
+                <MainQuantity>2</MainQuantity>
+                <CaclQuanty bg>-</CaclQuanty>
+              </QuantityDiv>
+              <ItemTotalPriceDiv>
+                {" "}
+                <strong>TIP:</strong> N7,400.00
+              </ItemTotalPriceDiv>
+              <DeleteIcon />
+            </ShopingCartHold>
+            <Line />
+          </ShoppingCartDiv>
+        ))}
 
         <CartTotalDiv>
           <TotalWrap>

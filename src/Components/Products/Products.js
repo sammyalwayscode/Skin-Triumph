@@ -1,8 +1,40 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 import Header from "../Header/Header";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../Global/GlobalState";
 
 const Products = () => {
+  const dispatch = useDispatch();
+  const [fecthProduct, setFecthProduct] = useState([]);
+
+  const getProducts = async () => {
+    const mainURL = "http://localhost:2221";
+    const URL = `${mainURL}/api/product/`;
+
+    await axios
+      .get(URL)
+      .then((res) => {
+        setFecthProduct(res.data.data);
+        console.log(res.data.data);
+      })
+      .catch((error) => {
+        new Swal({
+          title: error.response.data.message,
+          text: `Please Check and Fix this ERROR`,
+          icon: "error",
+          showConfirmButton: false,
+          timer: 3500,
+        });
+      });
+  };
+
+  useEffect(() => {
+    getProducts();
+    console.log(fecthProduct);
+  }, []);
   return (
     <>
       <Header />
@@ -20,91 +52,30 @@ const Products = () => {
         </ProdCategory>
         <Wrapper>
           <CardCtrl>
-            <ProductCard>
-              <ImgDiv>
-                <img src="./Images/img8.jpg" alt="" />
-              </ImgDiv>
-              <OtherWatch>
-                <ProductTitle>Hibiscus Bathing Soap Skin Enhancer</ProductTitle>
-                <Butons>
-                  <CartBut>Add to Cart</CartBut>
-                  <Price>N7,800.00</Price>
-                </Butons>
-                <ShortDescrib>
-                  Skintriumph Hibiscus soap fight germs and bacterial from skin
-                  surface, also fight germs that cause body odor and eczema.
-                  <strong>Read More</strong>
-                </ShortDescrib>
-              </OtherWatch>
-            </ProductCard>
-            <ProductCard>
-              <ImgDiv>
-                <img src="./Images/img8.jpg" alt="" />
-              </ImgDiv>
-              <OtherWatch>
-                <ProductTitle>Hibiscus Bathing Soap Skin Enhancer</ProductTitle>
-                <Butons>
-                  <CartBut>Add to Cart</CartBut>
-                  <Price>N7,800.00</Price>
-                </Butons>
-                <ShortDescrib>
-                  Skintriumph Hibiscus soap fight germs and bacterial from skin
-                  surface, also fight germs that cause body odor and eczema.
-                  <strong>Read More</strong>
-                </ShortDescrib>
-              </OtherWatch>
-            </ProductCard>
-            <ProductCard>
-              <ImgDiv>
-                <img src="./Images/img8.jpg" alt="" />
-              </ImgDiv>
-              <OtherWatch>
-                <ProductTitle>Hibiscus Bathing Soap Skin Enhancer</ProductTitle>
-                <Butons>
-                  <CartBut>Add to Cart</CartBut>
-                  <Price>N7,800.00</Price>
-                </Butons>
-                <ShortDescrib>
-                  Skintriumph Hibiscus soap fight germs and bacterial from skin
-                  surface, also fight germs that cause body odor and eczema.
-                  <strong>Read More</strong>
-                </ShortDescrib>
-              </OtherWatch>
-            </ProductCard>
-            <ProductCard>
-              <ImgDiv>
-                <img src="./Images/img8.jpg" alt="" />
-              </ImgDiv>
-              <OtherWatch>
-                <ProductTitle>Hibiscus Bathing Soap Skin Enhancer</ProductTitle>
-                <Butons>
-                  <CartBut>Add to Cart</CartBut>
-                  <Price>N7,800.00</Price>
-                </Butons>
-                <ShortDescrib>
-                  Skintriumph Hibiscus soap fight germs and bacterial from skin
-                  surface, also fight germs that cause body odor and eczema.
-                  <strong>Read More</strong>
-                </ShortDescrib>
-              </OtherWatch>
-            </ProductCard>
-            <ProductCard>
-              <ImgDiv>
-                <img src="./Images/img8.jpg" alt="" />
-              </ImgDiv>
-              <OtherWatch>
-                <ProductTitle>Hibiscus Bathing Soap Skin Enhancer</ProductTitle>
-                <Butons>
-                  <CartBut>Add to Cart</CartBut>
-                  <Price>N7,800.00</Price>
-                </Butons>
-                <ShortDescrib>
-                  Skintriumph Hibiscus soap fight germs and bacterial from skin
-                  surface, also fight germs that cause body odor and eczema.
-                  <strong>Read More</strong>
-                </ShortDescrib>
-              </OtherWatch>
-            </ProductCard>
+            {fecthProduct?.map((props) => (
+              <ProductCard key={props._id}>
+                <ImgDiv>
+                  <img src={props.avatar} alt="" />
+                </ImgDiv>
+                <OtherWatch>
+                  <ProductTitle>{props.productName}</ProductTitle>
+                  <Butons>
+                    <CartBut
+                      onClick={() => {
+                        dispatch(addToCart(props));
+                      }}
+                    >
+                      Add to Cart
+                    </CartBut>
+                    <Price> {props.price} </Price>
+                  </Butons>
+                  <ShortDescrib>
+                    {props.shortDescription}
+                    <strong>Read More</strong>
+                  </ShortDescrib>
+                </OtherWatch>
+              </ProductCard>
+            ))}
           </CardCtrl>
         </Wrapper>
       </Container>
@@ -215,6 +186,7 @@ const ProductCard = styled.div`
   margin-bottom: 20px;
   transition: all 350ms;
   /* background-color: blue; */
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 
   :hover {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -235,11 +207,12 @@ const ImgDiv = styled.div`
   align-items: flex-end;
   margin-bottom: 10px;
   height: 135px;
+  width: 100%;
   cursor: pointer;
   img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     border-radius: 7px 7px 0 0;
   }
 `;
@@ -278,6 +251,7 @@ const CartBut = styled.button`
   outline: none;
   border: none;
   transition: all 350ms;
+  font-family: poppins;
 
   :hover {
     transform: scale(0.94);
@@ -305,6 +279,7 @@ const Price = styled.div`
 const ShortDescrib = styled.div`
   text-align: center;
   font-size: 12px;
+  font-family: poppins;
   margin-bottom: 15px;
 `;
 const Button = styled.button`
