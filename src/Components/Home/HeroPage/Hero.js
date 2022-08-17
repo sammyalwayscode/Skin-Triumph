@@ -10,7 +10,7 @@ const Hero = () => {
         <Carousel.Item>
           <Image
             className="d-block w-100"
-            src="/Images/aaa.jpg"
+            src="/Images/abtput.jpg"
             alt="First slide"
           />
           <Carousel.Caption>
@@ -21,7 +21,7 @@ const Hero = () => {
         <Carousel.Item>
           <Image
             className="d-block w-100"
-            src="/Images/bbb.jpg"
+            src="/Images/homl.jpg"
             alt="Second slide"
           />
 
@@ -33,7 +33,7 @@ const Hero = () => {
         <Carousel.Item>
           <Image
             className="d-block w-100"
-            src="/Images/ddd.jpg"
+            src="/Images/hom2.jpg"
             alt="Third slide"
           />
 

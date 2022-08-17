@@ -1,10 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import { RiDeleteBack2Line } from "react-icons/ri";
-import { useSelector } from "react-redux";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, removeFromCart } from "../../Global/GlobalState";
+import { NavLink } from "react-router-dom";
 
 const ItemCart = () => {
   const getCart = useSelector((state) => state.cart);
+  const getTotal = useSelector((state) => state.totalPrices);
+  const dispatch = useDispatch();
   return (
     <Container>
       <Hero>
@@ -24,16 +29,29 @@ const ItemCart = () => {
               <ItemPrice>
                 {" "}
                 <strong>Item Price:</strong>
+                <span>&#8358;</span>
                 {props.price}
               </ItemPrice>
               <QuantityDiv>
-                <CaclQuanty>+</CaclQuanty>
-                <MainQuantity>2</MainQuantity>
-                <CaclQuanty bg>-</CaclQuanty>
+                <CaclQuanty
+                  onClick={() => {
+                    dispatch(addToCart(props));
+                  }}
+                >
+                  <IoIosArrowBack color="#000" />
+                </CaclQuanty>
+                <MainQuantity> {props.qty} </MainQuantity>
+                <CaclQuanty
+                  onClick={() => {
+                    dispatch(removeFromCart(props));
+                  }}
+                >
+                  <IoIosArrowForward color="#000" />
+                </CaclQuanty>
               </QuantityDiv>
               <ItemTotalPriceDiv>
                 {" "}
-                <strong>TIP:</strong> N7,400.00
+                <span>&#8358;</span> {props.price * props.qty}
               </ItemTotalPriceDiv>
               <DeleteIcon />
             </ShopingCartHold>
@@ -45,12 +63,16 @@ const ItemCart = () => {
           <TotalWrap>
             <h3>Cart Total</h3>
             <Detail>
-              <strong>Sub-total</strong>
-              <span>N18,000.00</span>
+              <strong>Sub-total:</strong>
+              <span>
+                {" "}
+                <span>&#8358;</span>
+                {getTotal}.00
+              </span>
             </Detail>
             <Detail>
-              <strong>Shipping</strong>
-              <span>Enter Your Shipping Options Below</span>
+              <strong>Shipping:</strong>
+              <span>Shipping Fee is N200</span>
             </Detail>
             <ShipOption />
             <hr />
@@ -58,7 +80,12 @@ const ItemCart = () => {
               {" "}
               <strong>Total</strong> <span>N18,600.00</span>{" "}
             </TotalDetail>
-            <Button>Proceed to Check Out</Button>
+
+            <center>
+              <NavLink to="/checkout">
+                <Button>Proceed to Check Out</Button>
+              </NavLink>
+            </center>
           </TotalWrap>
         </CartTotalDiv>
       </Wrapper>
@@ -110,13 +137,17 @@ const Wrapper = styled.div`
   }
   /* @media (max-width: 800px) {
     width: 700px;
-  }
-  @media (max-width: 700px) {
+  } */
+  /* @media (max-width: 700px) {
     width: 500px;
-  }
+  } */
   @media (max-width: 500px) {
     width: 310px;
-  } */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 const ShoppingCartDiv = styled.div`
   /* width: 65%; */
@@ -127,23 +158,30 @@ const ShoppingCartDiv = styled.div`
   justify-content: center;
 
   /* background-color: aqua; */
+  @media (max-width: 500px) {
+    width: 300px;
+  }
 `;
 
 const ShopingCartHold = styled.div`
   min-height: 60px;
-  width: 100%;
+  width: 90%;
   /* background-color: beige; */
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   margin-bottom: 10px;
+
+  @media (max-width: 500px) {
+    /* justify-content: flex-start; */
+  }
 `;
 const ImageDiv = styled.div`
   height: 50px;
   width: 50px;
   border-radius: 50%;
-  margin-left: 20px;
+  /* margin-left: 20px; */
   background-color: #eee;
 
   img {
@@ -155,25 +193,37 @@ const ImageDiv = styled.div`
 `;
 const ItemName = styled.div`
   margin: 0 20px;
-  width: 250px;
+  width: 200px;
   font-size: 13px;
   font-weight: 600;
   /* background-color: azure; */
   flex-wrap: wrap;
   text-align: center;
+  @media (max-width: 500px) {
+    margin: 0 10px;
+    width: 180px;
+    font-size: 11px;
+    text-align: left;
+  }
 `;
 const ItemPrice = styled.div`
   margin: 0 20px;
   font-size: 12px;
   font-weight: 500;
-  color: #bbb;
+  /* color: #bbb; */
+  color: #5bd395;
   strong {
     display: none;
+  }
+  @media (max-width: 500px) {
+    margin: 0 5px;
+    font-size: 11px;
+    font-weight: bold;
   }
 `;
 const QuantityDiv = styled.div`
   display: flex;
-  width: 150px;
+  width: 90px;
   /* background-color: aliceblue; */
   justify-content: space-around;
 
@@ -182,8 +232,9 @@ const QuantityDiv = styled.div`
   }
 `;
 const CaclQuanty = styled.button`
-  padding: 2px 13px;
-  background-color: ${({ bg }) => (bg ? "red" : "green")};
+  /* padding: 2px 13px; */
+  /* background-color: ${({ bg }) => (bg ? "red" : "green")}; */
+  background-color: #fff;
   border: 0;
   outline: none;
   border-radius: 3px;
@@ -193,7 +244,7 @@ const CaclQuanty = styled.button`
 const MainQuantity = styled.div`
   height: 28px;
   width: 28px;
-  background-color: lightgray;
+  /* background-color: lightgray; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -205,7 +256,8 @@ const ItemTotalPriceDiv = styled.div`
   margin: 0 20px;
   font-size: 12px;
   font-weight: 600;
-  color: #aaa;
+  /* color: #aaa; */
+  color: orange;
   strong {
     display: none;
   }
@@ -222,12 +274,23 @@ const DeleteIcon = styled(RiDeleteBack2Line)`
 `;
 const CartTotalDiv = styled.div`
   background-color: lightgray;
+  border-radius: 10px;
 `;
-const TotalWrap = styled.div``;
+const TotalWrap = styled.div`
+  padding: 20px;
+`;
 const Detail = styled.div``;
 const ShipOption = styled.div``;
 const TotalDetail = styled.div``;
-const Button = styled.div``;
+const Button = styled.button`
+  font-family: poppins;
+  font-weight: 700;
+  background-color: #000;
+  color: #fff;
+  outline: none;
+  border: none;
+  padding: 8px 20px;
+`;
 const Line = styled.hr`
   width: 50%;
   background-color: lightgray;

@@ -72,6 +72,7 @@ export default Stocklist;
 const Container = styled.div`
   width: 100%;
   font-family: poppins;
+  padding-top: 70px;
 `;
 
 const HeroStock = styled.div`

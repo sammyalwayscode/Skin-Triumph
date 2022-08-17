@@ -5,7 +5,7 @@ const About1a = () => {
   return (
     <Container>
       <ImageDiv>
-        <Image src="/Images/uni.jpeg" alt="" />
+        <Image src="/Images/abt1.jpg" alt="" />
       </ImageDiv>
       <TextDiv>
         <Title>Standard</Title>

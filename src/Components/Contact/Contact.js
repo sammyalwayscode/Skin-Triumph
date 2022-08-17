@@ -70,6 +70,7 @@ const Container = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  padding-top: 70px;
 `;
 const Wrapper = styled.div`
   width: 1200px;

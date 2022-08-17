@@ -12,10 +12,11 @@ const HeroAbout = () => {
 export default HeroAbout;
 
 const Conatiner = styled.div`
-  background-image: url("/Images/btu1.webp");
+  background-image: url("/Images/abtput.jpg");
   height: 500px;
   width: 100%;
   background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
   display: flex;
   justify-content: center;

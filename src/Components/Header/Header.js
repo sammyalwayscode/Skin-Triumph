@@ -13,9 +13,11 @@ import { VscThreeBars } from "react-icons/vsc";
 import { GiCancel } from "react-icons/gi";
 import SideBar from "./SideBar";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [toggle, setToggle] = useState(false);
+  const getQty = useSelector((state) => state.qty);
 
   const toggleChange = () => {
     setToggle(!toggle);
@@ -54,10 +56,19 @@ const Header = () => {
               <span>Contact</span>
             </Navs>
             <CartDiv to="/cart">
-              <FaShoppingCart />
+              <div>
+                <FaShoppingCart />
+              </div>
+              <CartCount> {getQty} </CartCount>
             </CartDiv>
           </Navigations>
           <Side>
+            <CartDiv to="/cart">
+              <div>
+                <FaShoppingCart />
+              </div>
+              <CartCount> {getQty} </CartCount>
+            </CartDiv>
             {toggle ? (
               <GiCancel onClick={toggleChange} color="#fff" size="30px" />
             ) : (
@@ -82,6 +93,8 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   font-family: poppins;
+  position: fixed;
+  z-index: 10;
 `;
 const Wrapper = styled.div`
   width: 85%;
@@ -131,6 +144,7 @@ const CartDiv = styled(NavLink)`
   cursor: pointer;
   text-decoration: none;
   color: #fff;
+  display: flex;
 
   :hover {
     color: #e8bf0a;
@@ -142,10 +156,23 @@ const CartDiv = styled(NavLink)`
   }
 `;
 
+const CartCount = styled.div`
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: orange;
+  font-size: 12px;
+  color: #fff;
+  font-weight: bold;
+`;
+
 const Side = styled.div`
   display: none;
 
   @media (max-width: 768px) {
-    display: block;
+    display: flex;
   }
 `;

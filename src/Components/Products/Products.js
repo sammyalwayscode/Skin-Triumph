@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import Header from "../Header/Header";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../Global/GlobalState";
+import Footer from "../Footer/Footer";
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -67,11 +68,14 @@ const Products = () => {
                     >
                       Add to Cart
                     </CartBut>
-                    <Price> {props.price} </Price>
+                    <Price>
+                      {" "}
+                      <span>&#8358;</span> {props.price}
+                    </Price>
                   </Butons>
                   <ShortDescrib>
                     {props.shortDescription}
-                    <strong>Read More</strong>
+                    <strong>... Read More</strong>
                   </ShortDescrib>
                 </OtherWatch>
               </ProductCard>
@@ -79,6 +83,7 @@ const Products = () => {
           </CardCtrl>
         </Wrapper>
       </Container>
+      <Footer />
     </>
   );
 };
@@ -91,6 +96,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-top: 70px;
 `;
 const ProductHero = styled.div`
   height: 300px;
@@ -185,15 +191,16 @@ const ProductCard = styled.div`
   align-items: center;
   margin-bottom: 20px;
   transition: all 350ms;
+  font-family: poppins;
   /* background-color: blue; */
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; */
 
   :hover {
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    transform: scale(1.02);
+    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transform: scale(1.02); */
   }
   @media (max-width: 768px) {
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
     margin: 10px;
   }
   @media (max-width: 500px) {
@@ -212,7 +219,7 @@ const ImgDiv = styled.div`
   img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 7px 7px 0 0;
   }
 `;
@@ -261,12 +268,12 @@ const Price = styled.div`
   height: 30px;
   width: 120px;
   /* background-color: #000; */
-  color: #000;
-  font-size: 14px;
+  color: #5bd395;
+  font-size: 18px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  font-weight: 600;
+  font-weight: 700;
   border-radius: 3px;
   text-decoration: underline;
   transition: all 350ms;
@@ -277,7 +284,7 @@ const Price = styled.div`
   }
 `;
 const ShortDescrib = styled.div`
-  text-align: center;
+  /* text-align: center; */
   font-size: 12px;
   font-family: poppins;
   margin-bottom: 15px;
