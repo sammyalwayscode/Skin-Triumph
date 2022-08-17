@@ -20,4 +20,6 @@ const Cart = () => {
 
 export default Cart;
 
-const Container = styled.div``;
+const Container = styled.div`
+  padding-top: 70px;
+`;

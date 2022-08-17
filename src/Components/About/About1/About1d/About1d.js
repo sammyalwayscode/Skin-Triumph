@@ -5,7 +5,7 @@ const About1d = () => {
   return (
     <Container>
       <ImageDiv>
-        <Image src="/Images/res.jpg" alt="" />
+        <Image src="/Images/abt4.jpg" alt="" />
       </ImageDiv>
       <TextDiv>
         <Title>Well Crafted Research</Title>

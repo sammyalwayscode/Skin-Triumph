@@ -24,4 +24,6 @@ const About = () => {
 
 export default About;
 
-const Container = styled.div``;
+const Container = styled.div`
+  padding-top: 70px;
+`;
