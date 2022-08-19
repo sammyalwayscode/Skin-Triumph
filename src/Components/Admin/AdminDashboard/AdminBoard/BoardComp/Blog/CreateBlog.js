@@ -6,22 +6,30 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import * as yup from "yup";
-import upl from "../../../../Img/FGGG.jpg";
+import blogPreImg from "./blo.jpg";
 
-const ProductUpload = () => {
-  const navigate = useNavigate();
-  const [image, setImage] = useState(upl);
+const CreateBlog = () => {
+  const [image, setImage] = useState(blogPreImg);
   const [avatar, setAvatar] = useState("");
+  const navigate = useNavigate();
+
+  const handleImage = async (e) => {
+    const file = e.target.files[0];
+    const save = URL.createObjectURL(file);
+    setAvatar(file);
+    setImage(save);
+  };
 
   const handleForm = yup.object().shape({
-    productName: yup.string().required("A Product name is Needed"),
-    category: yup.string().required("Please Select a Category"),
-    price: yup.number().required("A Price Is Required"),
-    shortDescription: yup
+    blogTitle: yup.string().max(50).min(30).required("Blog Title Is Required"),
+    blogShotDes: yup
       .string()
-      .max(120)
-      .required("Please Input a Short Description"),
-    productDescription: yup.string().required("Full Detaild Required"),
+      .min(150)
+      .max(170)
+      .required("Input a Short Description"),
+    descPragraphOne: yup.string().required("Detailed Description is Required"),
+    descPragraphTwo: yup.string(),
+    descPragraphThree: yup.string(),
   });
 
   const {
@@ -32,32 +40,26 @@ const ProductUpload = () => {
     resolver: yupResolver(handleForm),
   });
 
-  const handleImage = async (e) => {
-    const file = e.target.files[0];
-    const save = URL.createObjectURL(file);
-    setImage(save);
-    setAvatar(file);
-  };
-
-  const onSummitProduct = handleSubmit(async (value) => {
+  const onSummitBlog = handleSubmit(async (value) => {
     const {
-      productName,
-      category,
-      price,
-      shortDescription,
-      productDescription,
+      blogTitle,
+      blogShotDes,
+      descPragraphOne,
+      descPragraphTwo,
+      descPragraphThree,
     } = value;
     const mainURL = "http://localhost:2221";
-    const URL = `${mainURL}/api/product/uploadProduct`;
+    const URL = `${mainURL}/api/blog/create`;
     console.log(value);
 
     const formData = new FormData();
-    formData.append("productName", productName);
-    formData.append("category", category);
-    formData.append("price", price);
-    formData.append("shortDescription", shortDescription);
-    formData.append("productDescription", productDescription);
-    formData.append("avatar", avatar);
+
+    formData.append("blogTitle", blogTitle);
+    formData.append("blogShotDes", blogShotDes);
+    formData.append("descPragraphOne", descPragraphOne);
+    formData.append("descPragraphTwo", descPragraphTwo);
+    formData.append("descPragraphThree", descPragraphThree);
+    formData.append("blogImg", avatar);
 
     const config = {
       "content-type": "multipart/form-data",
@@ -71,11 +73,11 @@ const ProductUpload = () => {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Product Uploaded",
+          title: "Blog Created",
           showConfirmButton: false,
           timer: 2500,
         }).then(() => {
-          navigate("/boardproducts");
+          navigate("/boardblogs");
         });
       })
       .catch((error) => {
@@ -94,7 +96,7 @@ const ProductUpload = () => {
   return (
     <Container>
       <Wrapper>
-        <Card onSubmit={onSummitProduct} type="multipart/form-data">
+        <Card onSubmit={onSummitBlog} type="multipart/form-data">
           <MainTitle>
             <Title>Skintriumph</Title>
           </MainTitle>
@@ -113,53 +115,57 @@ const ProductUpload = () => {
             </ImageHolder>
 
             <InputCtrl>
-              <span>Product Name</span>
+              <span>Blog Title</span>
               <input
-                placeholder="e.g Body Cream"
-                {...register("productName")}
+                placeholder="e.g The Best Selling Product"
+                {...register("blogTitle")}
               />
-              <Error> {errors.productName?.message} </Error>
+              <Error> {errors.blogTitle?.message} </Error>
             </InputCtrl>
-            <InputCtrl>
-              <span>Category</span>
-              <select {...register("category")}>
-                <option>Soap</option>
-                <option>Body Wash</option>
-                <option>Scrubes</option>
-                <option>Creame</option>
-                <option>Face Corrector</option>
-                <option>Strech Mark</option>
-              </select>
-              <Error> {errors.category?.message} </Error>
-            </InputCtrl>
-            <InputCtrl>
-              <span>Price</span>
-              <input
-                type="number"
-                placeholder="e.g 12,000"
-                {...register("price")}
-              />
-              <Error> {errors.price?.message} </Error>
-            </InputCtrl>
+
+            {/* <InputCtrl>
+            <span>Short Description</span>
+            <input
+              placeholder="e.g The sest way to publish..."
+              {...register("blogShotDes")}
+            />
+            <Error> {errors.blogShotDes?.message} </Error>
+          </InputCtrl> */}
             <InputCtrl>
               <span>Short Description</span>
               <textarea
-                placeholder="A Pet Talk About The Product"
-                {...register("shortDescription")}
+                placeholder="e.g The sest way to publish..."
+                {...register("blogShotDes")}
               />
-              <Error> {errors.shortDescription?.message} </Error>
+              <Error> {errors.blogShotDes?.message} </Error>
             </InputCtrl>
             <InputCtrl>
-              <span>Full Details</span>
+              <span>Full Details(First Paragraph)</span>
               <textarea
-                placeholder="All you want Users to Know about the Product"
-                {...register("productDescription")}
+                placeholder="Full Details Of Your Blog(Paragraph 1)"
+                {...register("descPragraphOne")}
               />
-              <Error> {errors.productDescription?.message} </Error>
+              <Error> {errors.descPragraphOne?.message} </Error>
+            </InputCtrl>
+            <InputCtrl>
+              <span>Full Details(Second Paragraph)</span>
+              <textarea
+                placeholder="Full Details Of Your Blog(Paragraph 2)"
+                {...register("descPragraphTwo")}
+              />
+              <Error> {errors.descPragraphTwo?.message} </Error>
+            </InputCtrl>
+            <InputCtrl>
+              <span>Full Details(Third Paragraph)</span>
+              <textarea
+                placeholder="Full Details Of Your Blog (Paragraph 3)"
+                {...register("descPragraphThree")}
+              />
+              <Error> {errors.descPragraphThree?.message} </Error>
             </InputCtrl>
           </CreateHold>
           <Button>
-            <button type="submit">Upload Product</button>
+            <button type="submit">Upload Blog</button>
           </Button>
         </Card>
       </Wrapper>
@@ -167,7 +173,7 @@ const ProductUpload = () => {
   );
 };
 
-export default ProductUpload;
+export default CreateBlog;
 
 const Container = styled.div`
   min-height: calc(100vh - 50px);
@@ -287,6 +293,7 @@ const InputCtrl = styled.div`
     height: 30px;
     width: 300px;
     font-family: poppins;
+    font-size: 13px;
   }
 
   select {
@@ -300,6 +307,7 @@ const InputCtrl = styled.div`
     height: 100px;
     font-family: poppins;
     resize: none;
+    font-size: 13px;
   }
 `;
 

@@ -1,19 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Swal from "sweetalert2";
-import Footer from "../Footer/Footer";
-import { addToCart } from "../Global/GlobalState";
-import Header from "../Header/Header";
 
-const Detail = () => {
-  const { id } = useParams();
+const BoardProductDes = () => {
   const [getProductDetails, setGetProductDetails] = useState({});
-  const dispatch = useDispatch();
+  const { id } = useParams();
 
-  const getProducts = async () => {
+  const getDetailProduct = async () => {
     const mainURL = "http://localhost:2221";
     const URL = `${mainURL}/api/product/${id}`;
 
@@ -35,29 +30,26 @@ const Detail = () => {
   };
 
   useEffect(() => {
-    getProducts();
-    console.log(getProductDetails);
+    getDetailProduct();
   }, []);
   return (
-    <>
-      <Header />
-      <Container>
-        <Wrapper>
-          <ImageDiv>
-            <img src={getProductDetails.avatar} alt="" />
-          </ImageDiv>
-          <TextDetail>
-            <Title>{getProductDetails.productName}</Title>
-            <Price>
-              {" "}
-              Price:{" "}
-              <strong>
-                <span>&#8358;</span> {getProductDetails.price}
-              </strong>{" "}
-            </Price>
-            <Content>
-              <p>{getProductDetails.productDescription}</p>
-              {/* <p>
+    <Container>
+      <Wrapper>
+        <ImageDiv>
+          <img src={getProductDetails.avatar} alt="" />
+        </ImageDiv>
+        <TextDetail>
+          <Title>{getProductDetails.productName}</Title>
+          <Price>
+            {" "}
+            Price:{" "}
+            <strong>
+              <span>&#8358;</span> {getProductDetails.price}
+            </strong>{" "}
+          </Price>
+          <Content>
+            <p>{getProductDetails.productDescription}</p>
+            {/* <p>
                   This product contains 28 minerals such mustard seed oil,bay
                   leave and essential oils that was developed by our chemists.
                   In this formulation both the external and internal factors are
@@ -70,50 +62,50 @@ const Detail = () => {
                 <p>
                   The uniqueness of this product was source from areas known to
                   achieve results in skin stretching this product merge the
-                  barrier caused by external and internal factor by replacing
+                  barrier caused by exter
+                  nal and internal factor by replacing
                   the lost nutrients and increased the skin protein. This
                   product is one of its kinds as it is proven to work immensely
                   for all skin type
                 </p> */}
-            </Content>
-            <MoreBtn>
-              <QuantityDiv>
-                <CaclQuanty>+</CaclQuanty>
-                <MainQuantity>2</MainQuantity>
-                <CaclQuanty bg>-</CaclQuanty>
-              </QuantityDiv>
-              <CartAddBtn
-                onClick={() => {
-                  dispatch(addToCart(getProductDetails));
-                }}
-              >
-                Add To Cart
-              </CartAddBtn>
-            </MoreBtn>
-          </TextDetail>
-        </Wrapper>
-      </Container>
-      <Footer />
-    </>
+          </Content>
+          <MoreBtn>
+            <CartAddBtn>Update Prodct </CartAddBtn>
+            <CartAddBtn bg>Delete Product</CartAddBtn>
+          </MoreBtn>
+        </TextDetail>
+      </Wrapper>
+    </Container>
   );
 };
 
-export default Detail;
+export default BoardProductDes;
 
 const Container = styled.div`
-  width: 100%;
-  display: flex;
-  min-height: 100vh;
+  min-height: calc(100vh - 50px);
   height: 100%;
+  margin-top: 50px;
+  background-color: #f0f1f3;
+  width: calc(100vw - 180px);
+  margin-left: 180px;
+  background-color: #f8f8f9;
+  font-family: poppins;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  font-family: poppins;
-  margin-bottom: 20px;
-  padding-top: 70px;
-`;
 
+  @media (max-width: 770px) {
+    margin-left: 50px;
+    width: calc(100vw - 50px);
+  }
+  @media (max-width: 500px) {
+    margin-left: 0;
+    width: 100vw;
+  }
+`;
 const Wrapper = styled.div`
-  width: 1200px;
+  width: 1150px;
   display: flex;
   justify-content: space-between;
   /* align-items: center; */
@@ -125,10 +117,11 @@ const Wrapper = styled.div`
   @media (max-width: 800px) {
     justify-content: center;
   }
-  @media (max-width: 1200px) {
+  @media (max-width: 1150px) {
     width: 85%;
   }
 `;
+
 const ImageDiv = styled.div`
   height: 500px;
   width: 500px;
@@ -208,7 +201,10 @@ const CartAddBtn = styled.button`
   outline: none;
   border: 0;
   flex: 1;
-  background-color: #000;
+  background-color: ${({ bg }) => (bg ? "red" : "#000")};
   color: #fff;
   padding: 6px 0;
+  margin: 10px;
+  font-size: 15px;
+  font-weight: bold;
 `;

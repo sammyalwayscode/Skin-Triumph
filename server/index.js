@@ -5,6 +5,7 @@ const PORT = 2221;
 const app = express();
 const productRoute = require("./router/productRouter");
 const adminRoute = require("./router/adminRouter");
+const blogRoute = require("./router/blogRouter");
 app.use(cors());
 app.use(express.json());
 
@@ -14,6 +15,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/product", productRoute);
 app.use("/api/admin", adminRoute);
+app.use("/api/blog", blogRoute);
 
 app.listen(PORT, () => {
   console.log(`Server on PORT: ${PORT}`);
