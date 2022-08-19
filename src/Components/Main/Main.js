@@ -12,6 +12,7 @@ import Detail from "../DetailPage/Detail";
 import Footer from "../Footer/Footer";
 import Checkout from "../Checkout/Checkout";
 import Review from "../Review/Review";
+import DetailBlog from "../Blog/DetailBlog";
 
 const Main = () => {
   return (
@@ -27,6 +28,7 @@ const Main = () => {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/reviewdetails" element={<Review />} />
         <Route path="/product/detail/:id" element={<Detail />} />
+        <Route path="/blog/detail/:id" element={<DetailBlog />} />
       </Routes>
     </div>
   );

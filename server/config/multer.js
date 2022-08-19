@@ -16,5 +16,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage }).single("avatar");
 const adminUpload = multer({ storage: storage }).single("avatarImg");
+const blogUpload = multer({ storage: storage }).single("blogImg");
 
-module.exports = { upload, adminUpload };
+module.exports = { upload, adminUpload, blogUpload };

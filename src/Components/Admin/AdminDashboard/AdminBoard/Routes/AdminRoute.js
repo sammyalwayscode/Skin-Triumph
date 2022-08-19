@@ -3,9 +3,12 @@ import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 import Blog from "../BoardComp/Blog/Blog";
+import BoardDetailBlog from "../BoardComp/Blog/BoardDetailBlog";
+import CreateBlog from "../BoardComp/Blog/CreateBlog";
 import Customers from "../BoardComp/Customers/Customers";
 import Orders from "../BoardComp/Orders/Orders";
 import Overview from "../BoardComp/Overview/Overview";
+import BoardProductDes from "../BoardComp/Products/BoardProductDes";
 import Products from "../BoardComp/Products/Products";
 import ProductUpload from "../BoardComp/ProductsUpload/ProductUpload";
 import Stocklist from "../BoardComp/Stocklist/Stocklist";
@@ -23,8 +26,17 @@ const AdminRoute = () => {
             <Route path="/customers" element={<Customers />} />
             <Route path="/uploadproducts" element={<ProductUpload />} />
             <Route path="/boardproducts" element={<Products />} />
+            <Route
+              path="/boardproducts/detail/:id"
+              element={<BoardProductDes />}
+            />
             <Route path="/orders" element={<Orders />} />
             <Route path="/boardblogs" element={<Blog />} />
+            <Route path="/boardblogs/newblog" element={<CreateBlog />} />
+            <Route
+              path="/boardblogs/detail/:id"
+              element={<BoardDetailBlog />}
+            />
             <Route path="/boardstocklist" element={<Stocklist />} />
           </Routes>
         </Container>

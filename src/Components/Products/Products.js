@@ -6,6 +6,7 @@ import Header from "../Header/Header";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../Global/GlobalState";
 import Footer from "../Footer/Footer";
+import { NavLink } from "react-router-dom";
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -55,7 +56,7 @@ const Products = () => {
           <CardCtrl>
             {fecthProduct?.map((props) => (
               <ProductCard key={props._id}>
-                <ImgDiv>
+                <ImgDiv to={`/product/detail/${props._id}`}>
                   <img src={props.avatar} alt="" />
                 </ImgDiv>
                 <OtherWatch>
@@ -75,7 +76,9 @@ const Products = () => {
                   </Butons>
                   <ShortDescrib>
                     {props.shortDescription}
-                    <strong>... Read More</strong>
+                    <More to={`/product/detail/${props._id}`}>
+                      ... Read More
+                    </More>
                   </ShortDescrib>
                 </OtherWatch>
               </ProductCard>
@@ -89,6 +92,12 @@ const Products = () => {
 };
 
 export default Products;
+
+const More = styled(NavLink)`
+  font-weight: bold;
+  text-decoration: none;
+  color: #000;
+`;
 
 const Container = styled.div`
   width: 100%;
@@ -208,7 +217,7 @@ const ProductCard = styled.div`
     margin: 18px 0;
   }
 `;
-const ImgDiv = styled.div`
+const ImgDiv = styled(NavLink)`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -288,6 +297,9 @@ const ShortDescrib = styled.div`
   font-size: 12px;
   font-family: poppins;
   margin-bottom: 15px;
+  strong {
+    cursor: pointer;
+  }
 `;
 const Button = styled.button`
   height: 45px;
