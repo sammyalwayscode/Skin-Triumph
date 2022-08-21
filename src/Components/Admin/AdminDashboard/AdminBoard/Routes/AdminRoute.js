@@ -11,6 +11,7 @@ import Overview from "../BoardComp/Overview/Overview";
 import BoardProductDes from "../BoardComp/Products/BoardProductDes";
 import Products from "../BoardComp/Products/Products";
 import ProductUpload from "../BoardComp/ProductsUpload/ProductUpload";
+import NewStoreModal from "../BoardComp/Stocklist/NewStoreModal";
 import Stocklist from "../BoardComp/Stocklist/Stocklist";
 import Board from "../BoardHold/Board";
 
@@ -38,6 +39,10 @@ const AdminRoute = () => {
               element={<BoardDetailBlog />}
             />
             <Route path="/boardstocklist" element={<Stocklist />} />
+            <Route
+              path="/boardstocklist/newstore"
+              element={<NewStoreModal />}
+            />
           </Routes>
         </Container>
       ) : null}

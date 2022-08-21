@@ -1,41 +1,45 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 
 const Stocklist = () => {
-  const stockData = [
-    {
-      id: 1,
-      office: "God's Will Stores - Ikeja",
-      address: "38 Ayebeng Street, Adenta Shopping Center, Adenta",
-      phone: "+234 908 117 6026, +234 903 098 8589",
-      email: "info@afribeautycollective.com",
-      hours: "Tuesday – Saturday 10am – 5:30 pm",
-    },
-    {
-      id: 1,
-      office: "Spar Supersaver Stores - Ikorodu",
-      address: "38 Ayebeng Street, Adenta Shopping Center",
-      phone: "+234 908 117 6026, +234 903 098 8589",
-      email: "info@afribeautycollective.com",
-      hours: "Tuesday – Saturday 10am – 5:30 pm",
-    },
-    {
-      id: 1,
-      office: "la classic spar - Apapa",
-      address: "38 Ayebeng Street, Agric Ikorudu",
-      phone: "+234 908 117 6026, +234 903 098 8589",
-      email: "info@afribeautycollective.com",
-      hours: "Tuesday – Saturday 10am – 5:30 pm",
-    },
-  ];
+  const [stockData, setStockData] = useState([]);
+
+  const getStock = async () => {
+    const mainURL = "http://localhost:2221";
+    const URL = `${mainURL}/api/stocklist/`;
+
+    await axios
+      .get(URL)
+      .then((res) => {
+        console.log(res.data.data);
+        setStockData(res.data.data);
+      })
+      .catch((error) => {
+        new Swal({
+          title: error.response.data.message,
+          text: `Please Check Your NETWORK Connections`,
+          icon: "error",
+          showConfirmButton: false,
+          timer: 3500,
+        });
+      });
+  };
+
+  useEffect(() => {
+    getStock();
+  }, []);
   return (
     <>
       <Header />
 
       <Container>
-        <HeroStock>Stocklist</HeroStock>
+        <HeroStock>
+          <HeroText>Stocklist</HeroText>
+        </HeroStock>
         <Stores>
           <MainStore>
             <h2>Flagship Store</h2>
@@ -54,7 +58,7 @@ const Stocklist = () => {
               <ContentHold2 key={props.id}>
                 <div> {props.office} </div>
                 <p> {props.address} </p>
-                <p>Tel: {props.phone} </p>
+                <p>Tel: {props.phoneNo} </p>
                 <p>Email: {props.email} </p>
                 <p>Hours: {props.hours} </p>
               </ContentHold2>
@@ -79,7 +83,9 @@ const HeroStock = styled.div`
   height: 500px;
   width: 100%;
   /* background-color: darkred; */
-  background: url("/Images/stock.webp") repeat fixed 100%;
+  background: url("/Images/stock.jpg") repeat fixed 100%;
+  background-position: top;
+  background-size: cover;
   margin-bottom: 70px;
   display: flex;
   justify-content: center;
@@ -87,6 +93,21 @@ const HeroStock = styled.div`
   font-size: 30px;
   font-weight: 800;
   color: #fff;
+`;
+
+const HeroText = styled.div`
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: poppins;
+  font-size: 30px;
+  font-weight: 800;
+  text-align: center;
 `;
 
 const Stores = styled.div`

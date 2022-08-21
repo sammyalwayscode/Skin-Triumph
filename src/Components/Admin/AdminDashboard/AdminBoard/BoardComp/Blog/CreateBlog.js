@@ -24,8 +24,8 @@ const CreateBlog = () => {
     blogTitle: yup.string().max(50).min(30).required("Blog Title Is Required"),
     blogShotDes: yup
       .string()
-      .min(150)
-      .max(170)
+      .min(160)
+      .max(175)
       .required("Input a Short Description"),
     descPragraphOne: yup.string().required("Detailed Description is Required"),
     descPragraphTwo: yup.string(),
