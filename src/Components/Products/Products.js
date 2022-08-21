@@ -111,7 +111,7 @@ const ProductHero = styled.div`
   height: 300px;
   width: 100%;
   background-color: darkcyan;
-  background: url("/Images/prod.jpg") repeat fixed 100%;
+  background: url("/Images/ducts.jpg") repeat fixed 100%;
   margin-bottom: 60px;
   background-size: cover;
   background-position: center;
