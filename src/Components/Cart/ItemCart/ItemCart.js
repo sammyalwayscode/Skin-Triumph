@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { RiDeleteBack2Line } from "react-icons/ri";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../../Global/GlobalState";
 import { NavLink } from "react-router-dom";
+import formatter from "number-to-currency";
 
 const ItemCart = () => {
   const getCart = useSelector((state) => state.cart);
   const getTotal = useSelector((state) => state.totalPrices);
   const dispatch = useDispatch();
+  const [view, setView] = useState(getCart);
+  console.log(view);
   return (
     <Container>
       <Hero>
@@ -30,7 +33,7 @@ const ItemCart = () => {
                 {" "}
                 <strong>Item Price:</strong>
                 <span>&#8358;</span>
-                {props.price}
+                {formatter(props.price)}
               </ItemPrice>
               <QuantityDiv>
                 <CaclQuanty
@@ -67,7 +70,7 @@ const ItemCart = () => {
               <span>
                 {" "}
                 <span>&#8358;</span>
-                {getTotal}.00
+                {formatter(getTotal)}.00
               </span>
             </Detail>
             <Detail>

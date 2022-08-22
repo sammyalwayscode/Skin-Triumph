@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../Global/GlobalState";
 import Footer from "../Footer/Footer";
 import { NavLink } from "react-router-dom";
+import formatter from "number-to-currency";
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -71,7 +72,7 @@ const Products = () => {
                     </CartBut>
                     <Price>
                       {" "}
-                      <span>&#8358;</span> {props.price}
+                      <span>&#8358;</span> {formatter(props.price)}
                     </Price>
                   </Butons>
                   <ShortDescrib>

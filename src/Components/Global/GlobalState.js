@@ -3,8 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   currentAdmin: null,
   cart: [],
-  qty: null,
+  qty: 0,
   totalPrices: 0,
+  preOdered: null,
 };
 
 const GlobalState = createSlice({
@@ -13,6 +14,9 @@ const GlobalState = createSlice({
   reducers: {
     createAdmin: (state, { payload }) => {
       state.currentAdmin = payload;
+    },
+    preOrderedDetail: (state, { payload }) => {
+      state.preOdered = payload;
     },
     signOut: (state) => {
       state.currentAdmin = null;
@@ -44,7 +48,12 @@ const GlobalState = createSlice({
   },
 });
 
-export const { createAdmin, signOut, addToCart, removeFromCart } =
-  GlobalState.actions;
+export const {
+  createAdmin,
+  signOut,
+  addToCart,
+  removeFromCart,
+  preOrderedDetail,
+} = GlobalState.actions;
 
 export default GlobalState.reducer;
