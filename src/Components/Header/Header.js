@@ -27,7 +27,7 @@ const Header = () => {
       <Container>
         <Wrapper>
           <Logo>
-            <img src="" alt="Logo" />
+            <img src="/logog.png" alt="Logo" />
           </Logo>
 
           <Navigations>
@@ -102,7 +102,15 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
-const Logo = styled.div``;
+const Logo = styled.div`
+  height: 100%;
+  width: 40px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+`;
 const Navigations = styled.div`
   width: 600px;
   /* background-color: gold; */
