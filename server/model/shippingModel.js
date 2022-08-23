@@ -18,6 +18,9 @@ const shippingSchema = mongoose.Schema({
   address: {
     type: String,
   },
+  orderOTP: {
+    type: String,
+  },
   delivered: {
     type: Boolean,
     default: false,

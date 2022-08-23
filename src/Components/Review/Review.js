@@ -1,12 +1,98 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import formatter from "number-to-currency";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { RiDeleteBack2Line } from "react-icons/ri";
+import { usePaystackPayment } from "react-paystack";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { clearCart, resetPrice, resetQty } from "../Global/GlobalState";
+import { useNavigate } from "react-router-dom";
 
 const Review = () => {
   const getCart = useSelector((state) => state.cart);
+  const getPreOder = useSelector((state) => state.preOdered);
+  const getTotalprice = useSelector((state) => state.totalPrices);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const config = {
+    reference: new Date().getTime().toString(),
+    email: `${getPreOder.email}`,
+    amount: `${getTotalprice * 100}`,
+    publicKey: "pk_test_2bbcb1eb3e54d6c60a722e7b3eda839163c83bf0",
+  };
+
+  const onSuccess = (reference) => {
+    console.log(reference);
+    const mainURL = "http://localhost:2221";
+    const URL = `${mainURL}/api/order/newshipping/order`;
+    axios
+      .post(URL, { orderDetail: getPreOder, email: getPreOder.email })
+      .then((res) => {
+        console.log(res);
+
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Order Sucessfull",
+          showConfirmButton: false,
+          timer: 2500,
+        }).then(() => {
+          navigate("/complect/order/success");
+          dispatch(clearCart());
+          dispatch(resetPrice());
+          dispatch(resetQty());
+        });
+      })
+      .catch((error) => {
+        new Swal({
+          title: error.response.data.message,
+          text: `Please Check and Fix this ERROR`,
+          icon: "error",
+          showConfirmButton: false,
+          timer: 3500,
+        });
+      });
+  };
+
+  const onClose = () => {
+    console.log("closed");
+  };
+
+  const initializePayment = usePaystackPayment(config);
+
+  const uploadCODOrder = async () => {
+    const mainURL = "http://localhost:2221";
+    const URL = `${mainURL}/api/order/newshipping/order`;
+    await axios
+      .post(URL, { orderDetail: getPreOder, email: getPreOder.email })
+      .then((res) => {
+        console.log(res);
+
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Order Sucessfull",
+          showConfirmButton: false,
+          timer: 2500,
+        }).then(() => {
+          navigate("/complect/order/success");
+          dispatch(clearCart());
+          dispatch(resetPrice());
+          dispatch(resetQty());
+        });
+      })
+      .catch((error) => {
+        new Swal({
+          title: error.response.data.message,
+          text: `Please Check and Fix this ERROR`,
+          icon: "error",
+          showConfirmButton: false,
+          timer: 3500,
+        });
+      });
+  };
+
   return (
     <Container>
       <Wrapper>
@@ -66,32 +152,69 @@ const Review = () => {
               <DeliverBoxHold>
                 <InfoHold>
                   <strong>Order ID:</strong>
-                  <span>Olorunda Samuel</span>
+                  <span> {getPreOder._id} </span>
                 </InfoHold>
                 <InfoHold>
                   <strong>Name:</strong>
-                  <span>Olorunda Samuel</span>
+                  <span> {getPreOder.username} </span>
                 </InfoHold>
                 <InfoHold>
                   <strong>Email:</strong>
-                  <span>Olorunda Samuel</span>
+                  <span>{getPreOder.email}</span>
                 </InfoHold>
                 <InfoHold>
                   <strong>State:</strong>
-                  <span>Olorunda Samuel</span>
+                  <span>{getPreOder.state}</span>
                 </InfoHold>
                 <InfoHold>
                   <strong>L.G.A:</strong>
-                  <span>Olorunda Samuel</span>
+                  <span>{getPreOder.LGA}</span>
                 </InfoHold>
                 <InfoHold>
                   <strong>Address:</strong>
-                  <span>Olorunda Samuel</span>
+                  <span>{getPreOder.address}</span>
                 </InfoHold>
               </DeliverBoxHold>
             </DeliverBox>
           </OrdererDetail>
-          <PayMeto>Payment Method</PayMeto>
+          <PayMeto>
+            <center>
+              <PayTxt>Payment Method</PayTxt>
+              <small>Choose A Payment Method to complect your Order</small>
+            </center>
+            <PayBoxHold>
+              <PayTextBox>
+                <h6>Cash on Delivery</h6>
+                <PayBox>
+                  <img
+                    src="/Images/cod.png"
+                    alt="Cash On Delivery Logo Logo"
+                    width="100px"
+                  />
+                </PayBox>
+              </PayTextBox>
+              <PayTextBox>
+                <h6>Paystark</h6>
+                <PayBox
+                  onClick={() => {
+                    initializePayment(onSuccess, onClose);
+                  }}
+                  style={{
+                    border: "none",
+                  }}
+                >
+                  <img
+                    src="/Images/paystark.png"
+                    alt="Paystark Logo"
+                    width="160px"
+                  />
+                </PayBox>
+              </PayTextBox>
+            </PayBoxHold>
+          </PayMeto>
+          <center>
+            <CompButton onClick={uploadCODOrder}>Complect Order</CompButton>
+          </center>
         </ReviewBox>
       </Wrapper>
     </Container>
@@ -369,8 +492,56 @@ const Line = styled.hr`
   margin-top: 0.9px;
 `;
 
-const PayMeto = styled.div``;
+const PayTxt = styled.div`
+  font-size: 20px;
+  font-weight: bold;
+`;
+const PayMeto = styled.div`
+  margin: 30px 0;
+  center {
+    margin-bottom: 20px;
+  }
+`;
+const PayTextBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+const PayBoxHold = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  @media (max-width: 600px) {
+    justify-content: center;
+  }
+`;
+
+const PayBox = styled.div`
+  height: 180px;
+  width: 180px;
+  margin: 0 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid #4ad295;
+  border-radius: 7px;
+`;
 
 const InfoHold = styled.div`
   margin: 10px 0;
+  font-size: 13px;
+`;
+
+const CompButton = styled.button`
+  padding: 5px 60px;
+  font-weight: 600;
+  color: #fff;
+  border: none;
+  outline: none;
+  background-color: #4ad295;
+  border-radius: 3px;
+  margin: 20px 0;
 `;

@@ -45,6 +45,15 @@ const GlobalState = createSlice({
       state.qty -= 1;
       state.totalPrices -= payload.price;
     },
+    clearCart: (state) => {
+      state.cart = [];
+    },
+    resetPrice: (state) => {
+      state.totalPrices = 0;
+    },
+    resetQty: (state) => {
+      state.qty = 0;
+    },
   },
 });
 
@@ -54,6 +63,9 @@ export const {
   addToCart,
   removeFromCart,
   preOrderedDetail,
+  clearCart,
+  resetPrice,
+  resetQty,
 } = GlobalState.actions;
 
 export default GlobalState.reducer;

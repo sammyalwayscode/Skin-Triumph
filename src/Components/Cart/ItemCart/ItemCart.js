@@ -21,7 +21,7 @@ const ItemCart = () => {
       </Hero>
       <Wrapper>
         {getCart?.map((props) => (
-          <ShoppingCartDiv>
+          <ShoppingCartDiv key={props._id}>
             <ShopingCartHold>
               {" "}
               <ImageDiv>
@@ -38,7 +38,7 @@ const ItemCart = () => {
               <QuantityDiv>
                 <CaclQuanty
                   onClick={() => {
-                    dispatch(addToCart(props));
+                    dispatch(removeFromCart(props));
                   }}
                 >
                   <IoIosArrowBack color="#000" />
@@ -46,7 +46,7 @@ const ItemCart = () => {
                 <MainQuantity> {props.qty} </MainQuantity>
                 <CaclQuanty
                   onClick={() => {
-                    dispatch(removeFromCart(props));
+                    dispatch(addToCart(props));
                   }}
                 >
                   <IoIosArrowForward color="#000" />
@@ -75,7 +75,10 @@ const ItemCart = () => {
             </Detail>
             <Detail>
               <strong>Shipping:</strong>
-              <span>Shipping Fee is N200</span>
+              <span>
+                Shipping Fee is <b>N500</b> for Orders widthin Lagos and{" "}
+                <b>N1500</b> for Orders Outside Lagos
+              </span>
             </Detail>
             <ShipOption />
             <hr />

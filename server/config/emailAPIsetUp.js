@@ -8,7 +8,7 @@ const CLIENT_ID =
 const CLIENT_SECRETE = "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";
 const CLIENT_REDIRECT = "https://developers.google.com/oauthplayground";
 const CLIENT_TOKEN =
-  "1//04uCJPHqkLjvoCgYIARAAGAQSNwF-L9Ir70QkS-M7vqgkmFBBgpIZfSJ86Z340kSvDOTNT-oGox1S4qcaCc1SzK57oH-BrLsqNMQ";
+  "1//04uqq3L6WLcK9CgYIARAAGAQSNwF-L9IrBQsCs6iwJStcfmS8dEtSzVugIPo-NZs4A5BT6N19bY_aeiuk9ddn7HDJTTSssAdtLUc";
 
 const oAuth2Client = new google.auth.OAuth2(
   CLIENT_ID,
@@ -65,4 +65,42 @@ const verifyMail = async (email, adminUser, name, adminToken) => {
   }
 };
 
-module.exports = { verifyMail };
+const orderMail = async (email, opt) => {
+  try {
+    const accessToken = await oAuth2Client.getAccessToken();
+
+    const transport = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        type: "OAuth2",
+        user: "sammysamtest3@gmail.com",
+        clientId: CLIENT_ID,
+        clientSecret: CLIENT_SECRETE,
+        refreshToken: CLIENT_TOKEN,
+        accessToken: accessToken.myToken,
+      },
+    });
+    const mailOptions = {
+      from: "Skin Triumph 📧📭📭📥 <sammysamtest3@gmail.com>",
+      to: email,
+      subject: "Purchase Sucessfull",
+      html: `
+      Hi There✌️, Thank you for your Order, your items will be delivered between 2-3 working days.
+      Our Dispatcher will get in touch with you
+      Hear is your Product ID to get your Product from the dispatcher ${opt}
+      `,
+    };
+    const result = transport.sendMail(mailOptions, (err, info) => {
+      if (err) {
+        console.log(err.message);
+      } else {
+        console.log("Order Has Been sent to your email...", info.response);
+      }
+    });
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+
+module.exports = { verifyMail, orderMail };
