@@ -58,7 +58,7 @@ const Checkout = () => {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Product Uploaded",
+          title: "Shippment Sucessfull",
           showConfirmButton: false,
           timer: 2500,
         }).then(() => {

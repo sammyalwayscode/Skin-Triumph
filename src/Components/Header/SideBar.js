@@ -10,8 +10,10 @@ import {
 import { AiTwotoneSkin } from "react-icons/ai";
 import { MdContacts } from "react-icons/md";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const SideBar = ({ setToggle, toggle }) => {
+  const getQty = useSelector((state) => state.qty);
   return (
     <Container>
       <Wrapper>
@@ -77,7 +79,7 @@ const SideBar = ({ setToggle, toggle }) => {
         >
           <FaShoppingCart />
           <span>Cart</span>
-          <div>20</div>
+          <div> {getQty} </div>
         </CartDiv>
       </Wrapper>
     </Container>
@@ -95,6 +97,8 @@ const Container = styled.div`
   /* align-items: center; */
   font-family: poppins;
   font-weight: 600;
+  position: fixed;
+  margin-top: 70px;
 `;
 const Wrapper = styled.div``;
 const Navs = styled(NavLink)`
